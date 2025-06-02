@@ -56560,7 +56560,7 @@ function Finder__Query(props) {
       setSuggestions([]);
       if (call) call.cancel();
       if (val) {
-        var _ref = (0,_logic_funnelback__WEBPACK_IMPORTED_MODULE_29__.suggest)(props.query.collection, val, props.config.dxp ? props.config.dxp : false),
+        var _ref = (0,_logic_funnelback__WEBPACK_IMPORTED_MODULE_29__.suggest)(props.query.collection, val, props.config.dxp ? props.config.dxp : false, props.config.site ? props.config.site : undefined),
           _ref2 = _slicedToArray(_ref, 2),
           promise = _ref2[0],
           newCall = _ref2[1];
@@ -57706,6 +57706,18 @@ var baseUrl = 'https://www.citystgeorges.ac.uk/web-services',
   suggestRootUrl = '/funnelback-16-suggest',
   maximumSuggestions = 100,
   timeout = 30000;
+function getSiteUrl(site) {
+  switch (site) {
+    case 'city':
+      return 'https://www.citystgeorges.ac.uk/web-services/dxp-fb/';
+      break;
+    case 'bayes':
+      return 'https://www.bayes.citystgeorges.ac.uk/webservices/dxp-fb/';
+      break;
+    default:
+      return 'https://www.citystgeorges.ac.uk/web-services/dxp-fb/';
+  }
+}
 
 /**
  * Funnelback search query.
@@ -57719,6 +57731,8 @@ var baseUrl = 'https://www.citystgeorges.ac.uk/web-services',
  * @return {Promise} - A promise of search results.
  */
 function find(collection, fixedFacets, fixedParameters, query, sortType, startRank, numRank, facets, parameters, dxp) {
+  var site = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : undefined;
+  var baseUrlWithSite = site ? getSiteUrl(site) : baseUrl;
   var fixedParams = {};
   fixedParameters && fixedParameters.forEach(function (param) {
     fixedParams["".concat(param.name)] = param.value;
@@ -57740,7 +57754,7 @@ function find(collection, fixedFacets, fixedParameters, query, sortType, startRa
   var CancelToken = axios__WEBPACK_IMPORTED_MODULE_20__["default"].CancelToken,
     call = CancelToken.source(),
     config = {
-      baseURL: dxp ? dxpBaseUrl : baseUrl,
+      baseURL: baseUrlWithSite,
       cancelToken: call.token,
       httpsAgent: new (https__WEBPACK_IMPORTED_MODULE_18___default().Agent)({
         keepAlive: true
@@ -57766,10 +57780,12 @@ function find(collection, fixedFacets, fixedParameters, query, sortType, startRa
  * @return {Promise} - A promise of an array of suggestion strings.
  */
 function suggest(collection, partialQuery, dxp) {
+  var site = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : undefined;
+  var baseUrlWithSite = site ? getSiteUrl(site) : baseUrl;
   var CancelToken = axios__WEBPACK_IMPORTED_MODULE_20__["default"].CancelToken,
     call = CancelToken.source(),
     config = {
-      baseURL: dxp ? dxpBaseUrl : baseUrl,
+      baseURL: baseUrlWithSite,
       cancelToken: call.token,
       url: dxp ? dxpSuggestRootUrl : suggestRootUrl,
       timeout: timeout,
@@ -58249,7 +58265,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
       }
     }
     call.cancel();
-    var _find = (0,_funnelback__WEBPACK_IMPORTED_MODULE_34__.find)(query.collection, query.fixedFacets, query.fixedParameters, query.query, query.sortType, query.startRank, query.numRanks, query.facets, query.parameters, config.dxp || false),
+    var _find = (0,_funnelback__WEBPACK_IMPORTED_MODULE_34__.find)(query.collection, query.fixedFacets, query.fixedParameters, query.query, query.sortType, query.startRank, query.numRanks, query.facets, query.parameters, config.dxp || false, config.site || undefined),
       _find2 = _slicedToArray(_find, 2),
       request = _find2[0],
       requestToken = _find2[1];
