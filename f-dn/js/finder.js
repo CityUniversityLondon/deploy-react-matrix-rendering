@@ -5456,7 +5456,6 @@ function useLogicWrapper(config, results, matrixQuery, element) {
   (0,react__WEBPACK_IMPORTED_MODULE_29__.useEffect)(function () {
     if (!defaultParams) return;
     var matrixState = !hasMounted && matrixQuery ? true : false;
-    console.log('step 2 defaultParams', defaultParams);
     var baseQuery = {
       collection: config.collection,
       facets: config.facetLabels && config.facetLabels.length > 0 ? (0,_url_params__WEBPACK_IMPORTED_MODULE_33__.getFacetParams)(config.facetLabels, defaultParams) : {},
