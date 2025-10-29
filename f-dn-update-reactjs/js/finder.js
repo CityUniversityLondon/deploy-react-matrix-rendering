@@ -3748,7 +3748,7 @@ function Finder__Query(props) {
       setSuggestions([]);
       if (call) call.cancel();
       if (val) {
-        var _ref = (0,_logic_funnelback__WEBPACK_IMPORTED_MODULE_31__.suggest)(props.query.collection, val, props.config.dxp ? props.config.dxp : false, props.config.site ? props.config.site : undefined),
+        var _ref = (0,_logic_funnelback__WEBPACK_IMPORTED_MODULE_31__.suggest)(props.query.collection, val, props.config.site ? props.config.site : undefined),
           _ref2 = _slicedToArray(_ref, 2),
           promise = _ref2[0],
           newCall = _ref2[1];
@@ -4005,6 +4005,10 @@ function Finder__Pagination(props) {
   var numberOfPages = props.totalMatching && props.numRanks && Math.ceil(props.totalMatching / props.numRanks),
     currentPage = props.currStart && props.numRanks && Math.ceil(props.currStart / props.numRanks),
     pages = [];
+  console.log('Rendering Pagination: ', {
+    numberOfPages: numberOfPages,
+    currentPage: currentPage
+  });
   var changePage = function changePage(pageNumber) {
     var newStartRank = props.numRanks && 1 + (pageNumber - 1) * props.numRanks,
       newQuery = props.query;
@@ -4929,9 +4933,20 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 
-var baseUrl = 'https://city-search.funnelback.squiz.cloud/s',
-  findRootUrl = '/search.json',
-  suggestRootUrl = '/suggest.json',
+function baseURL(site) {
+  switch (site) {
+    case 'citysport':
+      return 'https://www.citysport.org.uk/web-services/fb/';
+    case 'city':
+      return 'https://www.citystgeorges.ac.uk/web-services/dxp-fb';
+    case 'bayes':
+      return 'https://www.bayes.citystgeorges.ac.uk/webservices';
+    default:
+      return 'https://www.citystgeorges.ac.uk/web-services/dxp-fb';
+  }
+}
+var dxpFindRootUrl = '/funnelback-dxp-find',
+  dxpSuggestRootUrl = '/funnelback-dxp-suggest',
   maximumSuggestions = 100,
   timeout = 30000;
 
@@ -4946,7 +4961,7 @@ var baseUrl = 'https://city-search.funnelback.squiz.cloud/s',
  * @param {object} [facets] A map of facets to query strings.
  * @return {Promise} - A promise of search results.
  */
-function find(collection, fixedFacets, fixedParameters, query, sortType, startRank, numRank, facets, parameters) {
+function find(collection, fixedFacets, fixedParameters, query, sortType, startRank, numRank, facets, parameters, site) {
   var fixedParams = {};
   if (fixedParameters) {
     fixedParameters.forEach(function (param) {
@@ -4974,12 +4989,12 @@ function find(collection, fixedFacets, fixedParameters, query, sortType, startRa
   var CancelToken = axios__WEBPACK_IMPORTED_MODULE_19__["default"].CancelToken,
     call = CancelToken.source(),
     config = {
-      baseURL: baseUrl,
+      baseURL: baseURL(site),
       cancelToken: call.token,
       httpsAgent: new (https__WEBPACK_IMPORTED_MODULE_18___default().Agent)({
         keepAlive: true
       }),
-      url: findRootUrl,
+      url: dxpFindRootUrl,
       timeout: timeout,
       params: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, fixedParams), fixedFacetParams), facetParams), params), {}, {
         collection: collection,
@@ -5012,13 +5027,13 @@ function find(collection, fixedFacets, fixedParameters, query, sortType, startRa
  * @param {string} partialQuery The string to make suggestions for.
  * @return {Promise} - A promise of an array of suggestion strings.
  */
-function suggest(collection, partialQuery) {
+function suggest(collection, partialQuery, site) {
   var CancelToken = axios__WEBPACK_IMPORTED_MODULE_19__["default"].CancelToken,
     call = CancelToken.source(),
     config = {
-      baseURL: baseUrl,
+      baseURL: baseURL(site),
       cancelToken: call.token,
-      url: suggestRootUrl,
+      url: dxpSuggestRootUrl,
       timeout: timeout,
       params: {
         collection: collection,
@@ -5386,6 +5401,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
     return p.nonFBParam;
   });
   var initializeParams = config.facetLabels && config.facetLabels.length > 0 ? (0,_url_params__WEBPACK_IMPORTED_MODULE_33__.getFacetParams)(config.facetLabels, matrixQuery) : {};
+  var site = config.site || undefined;
 
   /**
    * initial state for the Funnelback query, taken from URL parameters and
@@ -5498,7 +5514,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
       }
     }
     call.cancel();
-    var _find = (0,_funnelback__WEBPACK_IMPORTED_MODULE_35__.find)(query.collection, query.fixedFacets, query.fixedParameters, query.query, query.sortType, query.startRank, query.numRanks, query.facets, query.parameters),
+    var _find = (0,_funnelback__WEBPACK_IMPORTED_MODULE_35__.find)(query.collection, query.fixedFacets, query.fixedParameters, query.query, query.sortType, query.startRank, query.numRanks, query.facets, query.parameters, site),
       _find2 = _slicedToArray(_find, 2),
       request = _find2[0],
       requestToken = _find2[1];
@@ -5508,7 +5524,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
       }
     });
     request.then(function (data) {
-      setResponse((0,_util__WEBPACK_IMPORTED_MODULE_32__.formatFBResponse)(data)); // ✅ Freeze before setting
+      setResponse(data); // ✅ Freeze before setting
       setUpdating(false);
     }).then(function () {
       if (query.interacted && summaryHeadingRef.current) {
