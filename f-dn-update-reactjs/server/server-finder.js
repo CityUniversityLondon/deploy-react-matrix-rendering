@@ -59765,7 +59765,7 @@ var dxpFindRootUrl = '/funnelback-dxp-find',
  * @param {object} [facets] A map of facets to query strings.
  * @return {Promise} - A promise of search results.
  */
-function find(collection, fixedFacets, fixedParameters, query, sortType, startRank, numRank, facets, parameters, site) {
+function find(collection, fixedFacets, fixedParameters, query, sortType, startRank, numRank, facets, parameters, site, profile) {
   var fixedParams = {};
   if (fixedParameters) {
     fixedParameters.forEach(function (param) {
@@ -59802,6 +59802,7 @@ function find(collection, fixedFacets, fixedParameters, query, sortType, startRa
       timeout: timeout,
       params: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, fixedParams), fixedFacetParams), facetParams), params), {}, {
         collection: collection,
+        profile: profile || "_default",
         num_ranks: numRank,
         query: query,
         sort: sortType || "",
@@ -60203,6 +60204,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
   });
   var initializeParams = config.facetLabels && config.facetLabels.length > 0 ? (0,_url_params__WEBPACK_IMPORTED_MODULE_33__.getFacetParams)(config.facetLabels, matrixQuery) : {};
   var site = config.site || undefined;
+  var profile = config.profile || "_default";
 
   /**
    * initial state for the Funnelback query, taken from URL parameters and
@@ -60210,6 +60212,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
    **/
   var initialQuery = {
     collection: config.collection,
+    profile: profile,
     facets: initializeParams,
     parameters: matrixQuery && matrixQuery.parameters && matrixQuery.parameters.length > 0 ? matrixQuery.parameters : {},
     fixedFacets: config.fixedFacets,
@@ -60315,7 +60318,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
       }
     }
     call.cancel();
-    var _find = (0,_funnelback__WEBPACK_IMPORTED_MODULE_35__.find)(query.collection, query.fixedFacets, query.fixedParameters, query.query, query.sortType, query.startRank, query.numRanks, query.facets, query.parameters, site),
+    var _find = (0,_funnelback__WEBPACK_IMPORTED_MODULE_35__.find)(query.collection, query.fixedFacets, query.fixedParameters, query.query, query.sortType, query.startRank, query.numRanks, query.facets, query.parameters, site, profile),
       _find2 = _slicedToArray(_find, 2),
       request = _find2[0],
       requestToken = _find2[1];
