@@ -57027,7 +57027,8 @@ function Finder__Filters(props) {
     clearFiltersMobile = !props.updating && Object.keys(props.query.facets).length > 0 || props.query.sortType !== props.config.sort[0].type ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default().createElement(_finder_reset__WEBPACK_IMPORTED_MODULE_8__["default"], {
       clear: props.clear,
       resetSort: true,
-      matrixState: props.matrixState
+      matrixState: props.matrixState,
+      site: props.config.site || "city" // Ensure site is defined
     }) : null;
   var sort = !props.matrixState && props.config.sort.length > 1 && props.config.displaySort && totalMatching ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default().createElement("div", {
     className: "wrapper--finder__select--sort--mobile"
@@ -58815,10 +58816,6 @@ function Finder__Pagination(props) {
   var numberOfPages = props.totalMatching && props.numRanks && Math.ceil(props.totalMatching / props.numRanks),
     currentPage = props.currStart && props.numRanks && Math.ceil(props.currStart / props.numRanks),
     pages = [];
-  console.log('Rendering Pagination: ', {
-    numberOfPages: numberOfPages,
-    currentPage: currentPage
-  });
   var changePage = function changePage(pageNumber) {
     var newStartRank = props.numRanks && 1 + (pageNumber - 1) * props.numRanks,
       newQuery = props.query;
@@ -60050,6 +60047,8 @@ function hyperLink(query, facet, pageNumber, numberRank) {
     switch (param[0]) {
       case "collection":
         return encodeURIComponent(param[0]) + "=" + encodeURIComponent(param[1]);
+      case "profile":
+        return encodeURIComponent(param[0]) + "=" + encodeURIComponent(param[1]);
       case "query":
         return encodeURIComponent(param[0]) + "=" + encodeURIComponent(param[1]);
       case "sortType":
@@ -60222,7 +60221,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
     numRanks: config.numRanks,
     query: matrixQuery && matrixQuery.query ? matrixQuery.query : "",
     sortType: config.sort[0].type,
-    startRank: 1
+    startRank: matrixQuery && matrixQuery.start_rank ? parseInt(matrixQuery.start_rank) : 1
   };
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_29__.useState)(Object.keys(matrixQuery).length ? matrixQuery : null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -60914,7 +60913,8 @@ function axiosRequest(config) {
     throw new Error("Bad response: ".concat(response.status));
   })["catch"](function (e) {
     if (!axios__WEBPACK_IMPORTED_MODULE_27__["default"].isCancel(e)) {
-      gaEvent("jsError", "JavaScript error", "Line ".concat(e.lineNumber, " - ").concat(e.message), "axiosRequest ".concat(e.fileName, " (").concat(window.location, ")"), 0, true);
+      var error = e;
+      gaEvent("jsError", "JavaScript error", error.message || "Unknown error", "axiosRequest (".concat(window.location, ")"), 0, true);
     }
     return undefined;
   });
@@ -60971,7 +60971,7 @@ function flattenObj(ob) {
     // We check the type of the i using
     // typeof() function and recursively
     // call the function again
-    if (_typeof(ob[i]) === "object" && !Array.isArray(ob[i])) {
+    if (_typeof(ob[i]) === "object" && !Array.isArray(ob[i]) && ob[i] !== null) {
       var temp = flattenObj(ob[i]);
       for (var j in temp) {
         if (i === "parameters") {
@@ -60983,16 +60983,14 @@ function flattenObj(ob) {
       }
     } else if (Array.isArray(ob[i])) {
       ob[i].forEach(function (val) {
-        if (i === "fixedFacets") {
+        if (i === "fixedFacets" && val.meta) {
           result["".concat(i, "-").concat(val.meta)] = val.value;
-        } else {
+        } else if (val.name) {
           result["".concat(i, "-").concat(val.name)] = val.value;
         }
       });
-    }
-    // Else store ob[i] in result directly
-    else {
-      result[i] = ob[i];
+    } else if (ob[i] !== null && ob[i] !== undefined) {
+      result[i] = String(ob[i]);
     }
   };
   for (var i in ob) {
