@@ -58348,6 +58348,7 @@ function Finder__Query(props) {
   var searchIconClassName = props.config.site && props.config.site === "bayes" ? "fa fa-search fa-lg" : "fal fa-sharp fa-search";
   var hasMounted = (0,_logic_has_mounted__WEBPACK_IMPORTED_MODULE_29__["default"])(); // ✅ detect client vs server
 
+  var inputRef = (0,react__WEBPACK_IMPORTED_MODULE_28__.useRef)(null);
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_28__.useState)(props.query.query || ""),
     _useState2 = _slicedToArray(_useState, 2),
     partialQuery = _useState2[0],
@@ -58371,7 +58372,6 @@ function Finder__Query(props) {
     _useState10 = _slicedToArray(_useState1, 2),
     activeSuggestionID = _useState10[0],
     setActiveSuggestionID = _useState10[1];
-  var textInput = null;
   (0,react__WEBPACK_IMPORTED_MODULE_28__.useEffect)(function () {
     setPartialQuery(props.query.query);
   }, [props.query.query, props.updating]);
@@ -58381,8 +58381,8 @@ function Finder__Query(props) {
     };
   }, [call]);
   function focusInput() {
-    if (textInput) {
-      textInput.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
   }
   var clearQuery = function clearQuery() {
@@ -58400,6 +58400,7 @@ function Finder__Query(props) {
     props.update.results(!props.update.updateState);
   };
   var submitForm = function submitForm(query) {
+    if (!query) return;
     if (call) call.cancel();
     setSuggestions([]);
     var newQuery = props.query;
@@ -58413,7 +58414,12 @@ function Finder__Query(props) {
   };
   var clear = partialQuery && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement(_finder_clear__WEBPACK_IMPORTED_MODULE_30__["default"], {
     clear: function clear() {
-      clearQuery();
+      var value = inputRef.current ? inputRef.current.value : "";
+      if (inputRef.current) inputRef.current.value = "";
+      setPartialQuery("");
+      if (value === props.query.query) {
+        clearQuery();
+      }
     },
     site: props.config.site || "city"
   });
@@ -58536,9 +58542,7 @@ function Finder__Query(props) {
     id: inputId,
     name: "query",
     placeholder: props.config.placeholder,
-    ref: function ref(input) {
-      textInput = input;
-    },
+    ref: inputRef,
     type: "text",
     value: partialQuery,
     onKeyDown: function onKeyDown(e) {
@@ -58580,7 +58584,7 @@ function Finder__Query(props) {
     type: "submit",
     className: "finder__query__submit",
     onClick: function onClick() {
-      return submitForm();
+      return submitForm(inputRef.current ? inputRef.current.value : "");
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
     className: "".concat(searchIconClassName, " finder__query__submit__icon"),
@@ -59619,13 +59623,9 @@ function Finder(props) {
   }, QueryInput)) : null;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("form", {
     className: "finder",
-    method: "GET"
-    // prevent default only after mount
-    ,
+    method: "GET",
     onSubmit: function onSubmit(e) {
-      if (hasMounted) {
-        e.preventDefault();
-      }
+      e.preventDefault();
     }
   }, props.config.site && props.config.site === "bayes" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, topSectionQueryInput, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "finder__main"
