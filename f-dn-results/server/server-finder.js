@@ -58798,22 +58798,33 @@ function Finder__Pagination(props) {
       default:
         className = "pagination__controls__element pagination__controls__button";
     }
-    pages.push(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      "aria-current": page === currentPage ? "page" : undefined,
-      "aria-expanded": page === currentPage ? true : false,
-      "aria-label": "Open page ".concat(page),
-      className: className,
-      "data-page": page,
-      "data-proximity": Math.abs(page - currentPage),
-      key: page,
-      role: "button",
-      "aria-disabled": page === currentPage ? true : false,
-      onClick: function onClick(e) {
-        e.preventDefault();
-        changePage(page);
-      },
-      href: (0,_logic_hyper_link__WEBPACK_IMPORTED_MODULE_1__.hyperLink)(props.query, null, page, props.numRanks)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, page)));
+    if (page === currentPage) {
+      pages.push(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        "aria-current": page === currentPage ? "page" : undefined,
+        className: className,
+        "data-page": page,
+        "data-proximity": Math.abs(page - currentPage),
+        key: page,
+        "aria-disabled": page === currentPage ? true : false
+      }, page));
+    } else {
+      pages.push(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+        "aria-current": page === currentPage ? "page" : undefined,
+        "aria-expanded": page === currentPage ? true : false,
+        "aria-label": "Open page ".concat(page),
+        className: className,
+        "data-page": page,
+        "data-proximity": Math.abs(page - currentPage),
+        key: page,
+        role: "button",
+        "aria-disabled": page === currentPage ? true : false,
+        onClick: function onClick(e) {
+          e.preventDefault();
+          changePage(page);
+        },
+        href: (0,_logic_hyper_link__WEBPACK_IMPORTED_MODULE_1__.hyperLink)(props.query, null, page, props.numRanks)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, page)));
+    }
     if (page === 1) {
       pages.push(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
         key: "firstEllipsis",
