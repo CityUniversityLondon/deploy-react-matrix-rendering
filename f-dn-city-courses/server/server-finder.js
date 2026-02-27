@@ -59771,14 +59771,14 @@ function Finder__Results(props) {
       response: props.response,
       update: props.update
     });
-    var clearFilterTag = props.query.facets && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_finder_clear_filters__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    var clearFilterTag = props.query.facets && props.config.clearFiltersWithinResults ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_finder_clear_filters__WEBPACK_IMPORTED_MODULE_7__["default"], {
       query: props.query,
       update: props.update,
       clear: props.clear,
       config: props.config,
       matrixState: props.matrixState,
       updating: props.updating
-    });
+    }) : null;
 
     // if we have more results than will fit on a single page, we need
     // pagination
@@ -60472,6 +60472,7 @@ function baseURL(site) {
   }
 }
 var dxpFindRootUrl = '/funnelback-dxp-find-test/_nocache',
+  //remove test as it pointing to a test endpoint, but we want to point to the production endpoint,
   dxpSuggestRootUrl = '/funnelback-dxp-suggest',
   maximumSuggestions = 100,
   timeout = 30000;
