@@ -2938,9 +2938,15 @@ function Finder__MultiCheckbox(props) {
 
     // toggle value
     if (currentValues.includes(normValue)) {
-      newQuery.facets[facet.meta] = currentValues.filter(function (v) {
+      var updated = currentValues.filter(function (v) {
         return v !== normValue;
       });
+      if (updated.length > 0) {
+        newQuery.facets[facet.meta] = updated;
+      } else {
+        // remove empty facet entry entirely
+        delete newQuery.facets[facet.meta];
+      }
       setCheckTotal(function (prev) {
         return prev - 1;
       });
@@ -4729,7 +4735,9 @@ function Finder__Results(props) {
       query: props.query,
       update: props.update,
       clear: props.clear,
-      config: props.config
+      config: props.config,
+      matrixState: props.matrixState,
+      updating: props.updating
     });
 
     // if we have more results than will fit on a single page, we need
@@ -5274,7 +5282,8 @@ function Finder(props) {
     type: props.config.resultCard,
     update: updater,
     updating: updating,
-    summaryHeadingRef: summaryHeadingRef
+    summaryHeadingRef: summaryHeadingRef,
+    matrixState: matrixState
   }));
   var QueryInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_components_query_finder_query__WEBPACK_IMPORTED_MODULE_13__["default"], {
     config: props.config,
