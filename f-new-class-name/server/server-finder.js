@@ -60078,8 +60078,11 @@ function Finder__Accordion(props) {
       onClick: toggleAccordion
     }, props.title, " ", props.totalChecked > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("span", {
       className: "v26-finder__accordion__count"
-    }, "(", props.totalChecked, ")"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("div", {
-      className: "finder__accordion__content",
+    }, "(", props.totalChecked, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("span", {
+      className: "fa-solid fa-chevron-down finder__accordion__toggle__icon",
+      "aria-hidden": "true"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("div", {
+      className: "v26-finder__accordion__content",
       "data-closed": !isOpen
     }, props.children));
   }
