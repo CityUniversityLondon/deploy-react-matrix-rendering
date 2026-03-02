@@ -56900,7 +56900,9 @@ function Finder__ClearFilterTag(props) {
     onClick: function onClick() {
       return updateQuery(value);
     }
-  }, value);
+  }, value, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+    className: "fa-sharp fa-solid fa-xmark icon"
+  }));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
     className: "v26-finder__filter v26-finder__tag"
   }, clearFilterTags, clearSingleFilterTag);
@@ -60073,7 +60075,9 @@ function Finder__Accordion(props) {
   } else {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("div", {
       className: "finder__accordion"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("h3", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("button", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("h3", {
+      className: "v26-finder__accordion__heading"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("button", {
       className: "v26-finder__accordion__toggle",
       type: "button",
       "aria-expanded": isOpen,
