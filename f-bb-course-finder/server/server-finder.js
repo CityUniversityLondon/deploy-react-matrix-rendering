@@ -58024,11 +58024,13 @@ function Finder__MultiCheckbox(props) {
     var isChecked = selectedValues.includes(val);
     var disable = responseFacets.includes(val) ? false : true;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
-      key: "".concat(facet.meta, "-").concat(String(value.data))
+      key: "".concat(facet.meta, "-").concat(String(value.data)),
+      className: "v26-finder_filters__checkbox_wrap"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("input", {
       type: "checkbox",
       id: val.replace(/\s+/g, '-'),
       name: "f\xB1".concat(facet.facetName, "|").concat(facet.meta, "[]"),
+      className: "v26-finder_filters__checkbox",
       value: val,
       checked: isChecked,
       onChange: function onChange() {
@@ -58037,7 +58039,7 @@ function Finder__MultiCheckbox(props) {
       disabled: disable,
       "data-test": isChecked
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("label", {
-      className: "v26-finder_filters__label--always",
+      className: "v26-finder_filters__label v26-finder_filters__label--always",
       htmlFor: val.replace(/\s+/g, '-')
     }, value.label));
   })) || null;
