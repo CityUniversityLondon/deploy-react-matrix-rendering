@@ -57442,10 +57442,7 @@ function Finder__Filters(props) {
     className: "v26-finder__filters__heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("span", {
     className: "v26-finder__filters__heading__text"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("span", {
-    className: "far fa-sharp fa-sliders-h icon",
-    "aria-hidden": "true"
-  }), " ", "Filter ".concat(props.config.summariseAs && props.config.summariseAs.plural)), clearFiltersMobile), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("fieldset", null, !props.hasMounted && props.query.fixedParameters ? props.query.fixedParameters.map(function (param) {
+  }, "Filter ".concat(props.config.summariseAs && props.config.summariseAs.plural)), clearFiltersMobile), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("fieldset", null, !props.hasMounted && props.query.fixedParameters ? props.query.fixedParameters.map(function (param) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_finder_hiddenInput__WEBPACK_IMPORTED_MODULE_11__["default"], {
       key: param.name,
       name: param.name,
@@ -57695,9 +57692,9 @@ function Finder__FiltersMobile(props) {
   var totalMatching = props.response && props.response.summary && props.response.summary.totalMatching;
   var result = totalMatching === 1 && props.summariseAs ? props.summariseAs.singular : props.summariseAs && props.summariseAs.plural ? props.summariseAs.plural : null;
   var totalMatchingMessage = totalMatching ? "Show ".concat(totalMatching, " ").concat(result) : "Close";
-  var filtersCount = props.config.displaySort ? props.config.sort[0].type !== props.query.sortType || Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
+  var filtersCount = props.config.displaySort ? props.config.sort[0].type !== props.query.sortType || Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Show Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--v26-finder__filters--mobile__toggle__count"
-  }, "(", props.config.sort[0].type !== props.query.sortType ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter") : Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
+  }, "(", props.config.sort[0].type !== props.query.sortType ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter") : Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Show Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--v26-finder__filters--mobile__toggle__count"
   }, "(", props.config.sort[0].type !== props.query.sortType ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter");
   var toggle = display ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("button", {
@@ -57734,6 +57731,7 @@ function Finder__FiltersMobile(props) {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("div", {
     className: "wrapper--v26-finder__filters--mobile__apply"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("button", {
+    className: "v26-finder__btn",
     type: "button",
     "aria-expanded": display,
     onClick: function onClick() {
@@ -59183,17 +59181,11 @@ function Finder__Query(props) {
   // ✅ Interactive version after hydration
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
     className: "v26-finder__query"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
-    className: "v26-finder__query__input"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
-    className: "v26-finder__query__icon--wrapper"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
-    className: "finder__icon ".concat(searchIconClassName, " icon"),
-    "aria-hidden": "true"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
-    className: "sr-only",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
     htmlFor: inputId
-  }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("input", {
+  }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
+    className: "v26-finder__query__input__wrapper"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("input", {
     autoComplete: "off",
     id: inputId,
     name: "query",
@@ -59236,7 +59228,7 @@ function Finder__Query(props) {
         setSuggestions([]);
       }
     }
-  }), suggestionsList, clear), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
     type: "submit",
     className: "v26-finder__query__submit",
     onClick: function onClick() {
@@ -59247,7 +59239,7 @@ function Finder__Query(props) {
     "aria-hidden": "true"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
     className: "finder__query__submit__text"
-  }, "Find"))));
+  }, "Search")), suggestionsList, clear)));
 }
 Finder__Query.propTypes = {
   config: (prop_types__WEBPACK_IMPORTED_MODULE_32___default().object),
