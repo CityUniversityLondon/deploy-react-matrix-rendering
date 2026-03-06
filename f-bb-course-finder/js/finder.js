@@ -2663,13 +2663,15 @@ function Finder__FiltersMobile(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_15___default().createElement("span", {
     className: "far fa-times icon",
     "aria-hidden": "true"
-  })), toggle, !noFacetsSelected && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_15___default().createElement(_filters_finder_reset__WEBPACK_IMPORTED_MODULE_18__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_15___default().createElement("div", {
+    className: "wrapper--v26-finder__filters__header"
+  }, toggle, !noFacetsSelected && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_15___default().createElement(_filters_finder_reset__WEBPACK_IMPORTED_MODULE_18__["default"], {
     clear: props.clear,
     resetSort: false,
     matrixState: props.matrixState,
     label: "Clear all filters",
     site: props.config.site || "city"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_15___default().createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_15___default().createElement("div", {
     className: "wrapper--v26-finder__filters--mobile__filters"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_15___default().createElement("div", {
     className: "wrapper--v26-finder__filters--mobile__filters__content"
