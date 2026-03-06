@@ -2655,7 +2655,7 @@ function Finder__FiltersMobile(props) {
     ref: filtersRef
   }, display && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_15___default().createElement("button", {
     type: "button",
-    className: "wrapper--v26-finder__filters__close",
+    className: "wrapper--v26-finder__filters--mobile__filters__close",
     "aria-label": "Close filters",
     onClick: function onClick() {
       return setDisplay(false);
