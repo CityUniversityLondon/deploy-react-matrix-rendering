@@ -979,7 +979,7 @@ function Finder__Results__Coursev26(props) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", {
       className: "fas fa-fw fa-graduation-cap icon",
       "aria-hidden": "true"
-    }), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, "Course code", props.details.listMetadata.code.length > 1 && 's', ":"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, props.details.listMetadata.code.join('/'))) : null;
+    }), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, "UCAS code", props.details.listMetadata.code.length > 1 && 's', ":"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("strong", null, props.details.listMetadata.code.join('/')))) : null;
 
   // compute entryYears separately; ensure we don't rely on potentially undefined metadata
   var entryYears = null;
