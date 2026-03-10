@@ -1653,28 +1653,30 @@ function Finder__FiltersMobile(props) {
     _useState2 = _slicedToArray(_useState, 2),
     display = _useState2[0],
     setDisplay = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(null),
-    _useState4 = _slicedToArray(_useState3, 2),
-    focusTrap = _useState4[0],
-    setFocusTrap = _useState4[1];
   var filtersRef = (0,react__WEBPACK_IMPORTED_MODULE_16__.useRef)(null);
+  var focusTrapRef = (0,react__WEBPACK_IMPORTED_MODULE_16__.useRef)(null);
 
   // Set up the focus trap once after mount
   (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
     var filtersEl = filtersRef.current;
     if (!filtersEl) return;
+    var applyButton = filtersEl.querySelector(".wrapper--finder__filters--mobile__apply");
     var trap = focus_trap__WEBPACK_IMPORTED_MODULE_17__.createFocusTrap(filtersEl, {
-      initialFocus: filtersEl.querySelector(".wrapper--finder__filters--mobile__apply"),
-      onDeactivate: function onDeactivate() {
-        return setDisplay(false);
-      },
+      initialFocus: applyButton || undefined,
       clickOutsideDeactivates: true
     });
-    setFocusTrap(trap);
+    focusTrapRef.current = trap;
+    return function () {
+      var _focusTrapRef$current;
+      if ((_focusTrapRef$current = focusTrapRef.current) !== null && _focusTrapRef$current !== void 0 && _focusTrapRef$current.active) {
+        focusTrapRef.current.deactivate();
+      }
+    };
   }, []);
 
   // Manage focus trap and scroll behavior based on `display`
   (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
+    var focusTrap = focusTrapRef.current;
     if (!focusTrap) return;
     if (display) {
       if (!focusTrap.active) focusTrap.activate();
@@ -1683,13 +1685,13 @@ function Finder__FiltersMobile(props) {
       if (focusTrap.active) focusTrap.deactivate();
       (0,_util__WEBPACK_IMPORTED_MODULE_18__.enableBodyScroll)();
     }
-  }, [display, focusTrap]);
+  }, [display]);
   var totalMatching = props.response && props.response.summary && props.response.summary.totalMatching;
   var result = totalMatching === 1 && props.summariseAs ? props.summariseAs.singular : props.summariseAs && props.summariseAs.plural ? props.summariseAs.plural : null;
   var totalMatchingMessage = totalMatching ? "Show ".concat(totalMatching, " ").concat(result) : "Close";
   var filtersCount = props.config.displaySort ? props.config.sort[0].type !== props.query.sortType || Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--v26-finder__filters--mobile__toggle__count"
-  }, "(", props.config.sort[0].type !== props.query.sortType ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter") : Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
+  }, "(", props.config.sort[0].type !== props.query.sortType && Object.keys(props.query.facets).length > 0 ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter") : Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--v26-finder__filters--mobile__toggle__count"
   }, "(", props.config.sort[0].type !== props.query.sortType ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter");
   var toggle = display ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("button", {
@@ -1855,28 +1857,30 @@ function Finder__FiltersMobile(props) {
     _useState2 = _slicedToArray(_useState, 2),
     display = _useState2[0],
     setDisplay = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(null),
-    _useState4 = _slicedToArray(_useState3, 2),
-    focusTrap = _useState4[0],
-    setFocusTrap = _useState4[1];
   var filtersRef = (0,react__WEBPACK_IMPORTED_MODULE_16__.useRef)(null);
+  var focusTrapRef = (0,react__WEBPACK_IMPORTED_MODULE_16__.useRef)(null);
 
   // Set up the focus trap once after mount
   (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
     var filtersEl = filtersRef.current;
     if (!filtersEl) return;
+    var applyButton = filtersEl.querySelector(".wrapper--finder__filters--mobile__apply");
     var trap = focus_trap__WEBPACK_IMPORTED_MODULE_17__.createFocusTrap(filtersEl, {
-      initialFocus: filtersEl.querySelector(".wrapper--finder__filters--mobile__apply"),
-      onDeactivate: function onDeactivate() {
-        return setDisplay(false);
-      },
+      initialFocus: applyButton || undefined,
       clickOutsideDeactivates: true
     });
-    setFocusTrap(trap);
+    focusTrapRef.current = trap;
+    return function () {
+      var _focusTrapRef$current;
+      if ((_focusTrapRef$current = focusTrapRef.current) !== null && _focusTrapRef$current !== void 0 && _focusTrapRef$current.active) {
+        focusTrapRef.current.deactivate();
+      }
+    };
   }, []);
 
   // Manage focus trap and scroll behavior based on `display`
   (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
+    var focusTrap = focusTrapRef.current;
     if (!focusTrap) return;
     if (display) {
       if (!focusTrap.active) focusTrap.activate();
@@ -1885,7 +1889,7 @@ function Finder__FiltersMobile(props) {
       if (focusTrap.active) focusTrap.deactivate();
       (0,_util__WEBPACK_IMPORTED_MODULE_18__.enableBodyScroll)();
     }
-  }, [display, focusTrap]);
+  }, [display]);
   var totalMatching = props.response && props.response.summary && props.response.summary.totalMatching;
   var result = totalMatching === 1 && props.summariseAs ? props.summariseAs.singular : props.summariseAs && props.summariseAs.plural ? props.summariseAs.plural : null;
   var totalMatchingMessage = totalMatching ? "Show ".concat(totalMatching, " ").concat(result) : "Close";
@@ -1893,7 +1897,7 @@ function Finder__FiltersMobile(props) {
     className: "wrapper--v26-finder__filters--mobile__toggle__count"
   }, "(", props.config.sort[0].type !== props.query.sortType ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter") : Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--v26-finder__filters--mobile__toggle__count"
-  }, "(", props.config.sort[0].type !== props.query.sortType ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter");
+  }, "(", props.config.sort[0].type !== props.query.sortType && Object.keys(props.query.facets).length > 0 ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter");
   var toggle = display ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("button", {
     type: "button",
     className: "wrapper--v26-finder__filters--mobile__toggle",
@@ -3009,28 +3013,30 @@ function Finder__FiltersMobile(props) {
     _useState2 = _slicedToArray(_useState, 2),
     display = _useState2[0],
     setDisplay = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(null),
-    _useState4 = _slicedToArray(_useState3, 2),
-    focusTrap = _useState4[0],
-    setFocusTrap = _useState4[1];
   var filtersRef = (0,react__WEBPACK_IMPORTED_MODULE_16__.useRef)(null);
+  var focusTrapRef = (0,react__WEBPACK_IMPORTED_MODULE_16__.useRef)(null);
 
   // Set up the focus trap once after mount
   (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
     var filtersEl = filtersRef.current;
     if (!filtersEl) return;
+    var applyButton = filtersEl.querySelector(".wrapper--finder__filters--mobile__apply");
     var trap = focus_trap__WEBPACK_IMPORTED_MODULE_17__.createFocusTrap(filtersEl, {
-      initialFocus: filtersEl.querySelector(".wrapper--finder__filters--mobile__apply"),
-      onDeactivate: function onDeactivate() {
-        return setDisplay(false);
-      },
+      initialFocus: applyButton || undefined,
       clickOutsideDeactivates: true
     });
-    setFocusTrap(trap);
+    focusTrapRef.current = trap;
+    return function () {
+      var _focusTrapRef$current;
+      if ((_focusTrapRef$current = focusTrapRef.current) !== null && _focusTrapRef$current !== void 0 && _focusTrapRef$current.active) {
+        focusTrapRef.current.deactivate();
+      }
+    };
   }, []);
 
   // Manage focus trap and scroll behavior based on `display`
   (0,react__WEBPACK_IMPORTED_MODULE_16__.useEffect)(function () {
+    var focusTrap = focusTrapRef.current;
     if (!focusTrap) return;
     if (display) {
       if (!focusTrap.active) focusTrap.activate();
@@ -3039,13 +3045,13 @@ function Finder__FiltersMobile(props) {
       if (focusTrap.active) focusTrap.deactivate();
       (0,_util__WEBPACK_IMPORTED_MODULE_18__.enableBodyScroll)();
     }
-  }, [display, focusTrap]);
+  }, [display]);
   var totalMatching = props.response && props.response.summary && props.response.summary.totalMatching;
   var result = totalMatching === 1 && props.summariseAs ? props.summariseAs.singular : props.summariseAs && props.summariseAs.plural ? props.summariseAs.plural : null;
   var totalMatchingMessage = totalMatching ? "Show ".concat(totalMatching, " ").concat(result) : "Close";
   var filtersCount = props.config.displaySort ? props.config.sort[0].type !== props.query.sortType || Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--v26-finder__filters--mobile__toggle__count"
-  }, "(", props.config.sort[0].type !== props.query.sortType ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter") : Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
+  }, "(", props.config.sort[0].type !== props.query.sortType && Object.keys(props.query.facets).length > 0 ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter") : Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--v26-finder__filters--mobile__toggle__count"
   }, "(", props.config.sort[0].type !== props.query.sortType ? Object.keys(props.query.facets).length + 1 : Object.keys(props.query.facets).length, ")")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filter");
   var toggle = display ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("button", {
@@ -5653,7 +5659,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Finder(props) {
-  var _props$initialResults, _props$config$site;
+  var _props$initialResults;
   var hasMounted = (0,_logic_has_mounted__WEBPACK_IMPORTED_MODULE_9__["default"])();
   var intialResults = Object.freeze({
     bestBets: [],
@@ -5691,18 +5697,7 @@ function Finder(props) {
     hasMounted: hasMounted,
     matrixState: matrixState
   };
-
-  // finder__filters.tsx
-  var FinderFilters = function FinderFilters(_ref) {
-    var site = _ref.site;
-    if (site === 'city') return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_components_filters_city_finder_filtersmobile_city__WEBPACK_IMPORTED_MODULE_11__["default"], sharedProps);
-    if (site === 'citysport') return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_components_filters_city_sport_finder_filtersmobile_citySports__WEBPACK_IMPORTED_MODULE_12__["default"], sharedProps);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_components_filters_finder_filtersmobile__WEBPACK_IMPORTED_MODULE_13__["default"], sharedProps);
-  };
-  console.log('props.config.site:', props.config.site);
-  var finderMain = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement((react__WEBPACK_IMPORTED_MODULE_8___default().Fragment), null, props.config.facetLabels && props.config.facetLabels.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(FinderFilters, {
-    site: (_props$config$site = props.config.site) !== null && _props$config$site !== void 0 ? _props$config$site : 'city'
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_components_results_finder_results__WEBPACK_IMPORTED_MODULE_14__["default"], {
+  var finderMain = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement((react__WEBPACK_IMPORTED_MODULE_8___default().Fragment), null, props.config.facetLabels && props.config.facetLabels.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement((react__WEBPACK_IMPORTED_MODULE_8___default().Fragment), null, props.config.site === 'city' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_components_filters_city_finder_filtersmobile_city__WEBPACK_IMPORTED_MODULE_11__["default"], sharedProps), props.config.site === 'citysport' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_components_filters_city_sport_finder_filtersmobile_citySports__WEBPACK_IMPORTED_MODULE_12__["default"], sharedProps), props.config.site !== 'city' && props.config.site !== 'citysport' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_components_filters_finder_filtersmobile__WEBPACK_IMPORTED_MODULE_13__["default"], sharedProps)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_components_results_finder_results__WEBPACK_IMPORTED_MODULE_14__["default"], {
     clear: clear,
     config: props.config,
     query: query,
