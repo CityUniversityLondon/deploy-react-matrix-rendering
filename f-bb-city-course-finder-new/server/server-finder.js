@@ -56921,7 +56921,8 @@ function dependencyMet(facet, facetMap) {
  * @returns {object} - React component.
  */
 function Finder__Filters(props) {
-  var totalMatching = props.response && props.response.summary && props.response.summary.fullyMatching;
+  var _props$response, _props$config$summari, _props$query$fixedPar, _props$config$facetLa;
+  var totalMatching = (_props$response = props.response) === null || _props$response === void 0 || (_props$response = _props$response.summary) === null || _props$response === void 0 ? void 0 : _props$response.fullyMatching;
   var clearFiltersDesktop = !props.updating && Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
       className: "v26-finder__filters__reset v26-finder__filters__reset--desktop"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_finder_reset__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -56964,15 +56965,16 @@ function Finder__Filters(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("span", {
     className: "far fa-sharp fa-sliders-h icon",
     "aria-hidden": "true"
-  }), " ", "Filter ".concat(props.config.summariseAs && props.config.summariseAs.plural)), clearFiltersMobile), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("fieldset", null, !props.hasMounted && props.query.fixedParameters ? props.query.fixedParameters.map(function (param) {
+  }), " ", "Filter ".concat((_props$config$summari = props.config.summariseAs) === null || _props$config$summari === void 0 ? void 0 : _props$config$summari.plural)), clearFiltersMobile), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("fieldset", null, !props.hasMounted && ((_props$query$fixedPar = props.query.fixedParameters) === null || _props$query$fixedPar === void 0 ? void 0 : _props$query$fixedPar.map(function (param) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_finder_hiddenInput__WEBPACK_IMPORTED_MODULE_11__["default"], {
       key: param.name,
       name: param.name,
       value: param.value
     });
-  }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
     className: "wrapper--v26-finder_filters--filters"
-  }, props.config.facetLabels && props.config.facetLabels.map(function (facet) {
+  }, (_props$config$facetLa = props.config.facetLabels) === null || _props$config$facetLa === void 0 ? void 0 : _props$config$facetLa.map(function (facet) {
+    var _props$response$facet, _props$response2, _props$config$facetLa2, _props$response3, _props$response4, _props$response$facet2, _props$response5, _props$config$facetLa3, _props$response$facet3, _props$response6, _props$config$facetLa4, _props$response$facet4, _props$response7, _props$config$facetLa5, _props$response$facet5, _props$response8, _props$config$facetLa6;
     if (dependencyMet(facet, props.query.facets)) {
       switch (facet.type) {
         case 'multiCheckbox':
@@ -56980,11 +56982,11 @@ function Finder__Filters(props) {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet = (_props$response2 = props.response) === null || _props$response2 === void 0 || (_props$response2 = _props$response2.facets) === null || _props$response2 === void 0 ? void 0 : _props$response2.filter(function (funnelbackFacet) {
               return funnelbackFacet.name.toLowerCase() === facet.funnelbackName.toLowerCase();
-            }) : [],
+            })) !== null && _props$response$facet !== void 0 ? _props$response$facet : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa2 = props.config.facetLabels) === null || _props$config$facetLa2 === void 0 ? void 0 : _props$config$facetLa2.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             mobile: props.mobile
@@ -56995,7 +56997,7 @@ function Finder__Filters(props) {
             facet: facet,
             query: props.query,
             update: props.update,
-            pastEventsResponse: props.response.extraSearches && props.response.extraSearches.past && props.response.extraSearches.past.response,
+            pastEventsResponse: (_props$response3 = props.response) === null || _props$response3 === void 0 || (_props$response3 = _props$response3.extraSearches) === null || _props$response3 === void 0 || (_props$response3 = _props$response3.past) === null || _props$response3 === void 0 ? void 0 : _props$response3.response,
             matrixState: props.matrixState
           });
         case "paramCheckBox":
@@ -57004,18 +57006,18 @@ function Finder__Filters(props) {
             facet: facet,
             query: props.query,
             update: props.update,
-            pastEventsResponse: props.response.extraSearches && props.response.extraSearches.past && props.response.extraSearches.past.response
+            pastEventsResponse: (_props$response4 = props.response) === null || _props$response4 === void 0 || (_props$response4 = _props$response4.extraSearches) === null || _props$response4 === void 0 || (_props$response4 = _props$response4.past) === null || _props$response4 === void 0 ? void 0 : _props$response4.response
           });
         case "eventSelect":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_finder_eventSelect__WEBPACK_IMPORTED_MODULE_15__["default"], {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet2 = (_props$response5 = props.response) === null || _props$response5 === void 0 || (_props$response5 = _props$response5.facets) === null || _props$response5 === void 0 ? void 0 : _props$response5.filter(function (funnelbackFacet) {
               return funnelbackFacet.name === facet.funnelbackName;
-            }) : [],
+            })) !== null && _props$response$facet2 !== void 0 ? _props$response$facet2 : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa3 = props.config.facetLabels) === null || _props$config$facetLa3 === void 0 ? void 0 : _props$config$facetLa3.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             mobile: props.mobile
@@ -57025,11 +57027,11 @@ function Finder__Filters(props) {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet3 = (_props$response6 = props.response) === null || _props$response6 === void 0 || (_props$response6 = _props$response6.facets) === null || _props$response6 === void 0 ? void 0 : _props$response6.filter(function (funnelbackFacet) {
               return funnelbackFacet.name === facet.funnelbackName;
-            }) : [],
+            })) !== null && _props$response$facet3 !== void 0 ? _props$response$facet3 : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa4 = props.config.facetLabels) === null || _props$config$facetLa4 === void 0 ? void 0 : _props$config$facetLa4.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             mobile: props.mobile
@@ -57039,11 +57041,11 @@ function Finder__Filters(props) {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet4 = (_props$response7 = props.response) === null || _props$response7 === void 0 || (_props$response7 = _props$response7.facets) === null || _props$response7 === void 0 ? void 0 : _props$response7.filter(function (funnelbackFacet) {
               return funnelbackFacet.name === facet.funnelbackName;
-            }) : [],
+            })) !== null && _props$response$facet4 !== void 0 ? _props$response$facet4 : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa5 = props.config.facetLabels) === null || _props$config$facetLa5 === void 0 ? void 0 : _props$config$facetLa5.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             mobile: props.mobile
@@ -57053,11 +57055,11 @@ function Finder__Filters(props) {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet5 = (_props$response8 = props.response) === null || _props$response8 === void 0 || (_props$response8 = _props$response8.facets) === null || _props$response8 === void 0 ? void 0 : _props$response8.filter(function (funnelbackFacet) {
               return funnelbackFacet.name === facet.funnelbackName;
-            }) : [],
+            })) !== null && _props$response$facet5 !== void 0 ? _props$response$facet5 : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa6 = props.config.facetLabels) === null || _props$config$facetLa6 === void 0 ? void 0 : _props$config$facetLa6.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             matrixState: props.matrixState
@@ -57176,6 +57178,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
  * Render the mobile version of the filters.
  */
 function Finder__FiltersMobile(props) {
+  var _props$response, _props$summariseAs, _props$summariseAs$pl, _props$summariseAs2, _props$summariseAs3;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_16__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     display = _useState2[0],
@@ -57213,8 +57216,8 @@ function Finder__FiltersMobile(props) {
       (0,_util__WEBPACK_IMPORTED_MODULE_18__.enableBodyScroll)();
     }
   }, [display]);
-  var totalMatching = props.response && props.response.summary && props.response.summary.totalMatching;
-  var result = totalMatching === 1 && props.summariseAs ? props.summariseAs.singular : props.summariseAs && props.summariseAs.plural ? props.summariseAs.plural : null;
+  var totalMatching = (_props$response = props.response) === null || _props$response === void 0 || (_props$response = _props$response.summary) === null || _props$response === void 0 ? void 0 : _props$response.totalMatching;
+  var result = totalMatching === 1 ? (_props$summariseAs = props.summariseAs) === null || _props$summariseAs === void 0 ? void 0 : _props$summariseAs.singular : (_props$summariseAs$pl = (_props$summariseAs2 = props.summariseAs) === null || _props$summariseAs2 === void 0 ? void 0 : _props$summariseAs2.plural) !== null && _props$summariseAs$pl !== void 0 ? _props$summariseAs$pl : null;
   var totalMatchingMessage = totalMatching ? "Show ".concat(totalMatching, " ").concat(result) : "Close";
   var filtersCount = props.config.displaySort ? props.config.sort[0].type !== props.query.sortType || Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", null, "Filters", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--v26-finder__filters--mobile__toggle__count"
@@ -57270,7 +57273,7 @@ function Finder__FiltersMobile(props) {
     "aria-hidden": "true"
   }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--v26-finder__filters--mobile__apply__text"
-  }, "Updating ", props.summariseAs && props.summariseAs.plural, "\u2026")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
+  }, "Updating ", (_props$summariseAs3 = props.summariseAs) === null || _props$summariseAs3 === void 0 ? void 0 : _props$summariseAs3.plural, "\u2026")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_16___default().createElement("span", {
     className: "wrapper--finder__filters--mobile__apply__text"
   }, Object.keys(props.query.facets).length === 0 ? "Close" : totalMatchingMessage)))));
 }
@@ -57389,6 +57392,7 @@ function dependencyMet(facet, facetMap) {
  * @returns {object} - React component.
  */
 function Finder__Filters(props) {
+  var _props$config$summari, _props$query$fixedPar, _props$config$facetLa;
   var totalMatching = props.response && props.response.summary && props.response.summary.fullyMatching;
   var sort = !props.matrixState && props.config.sort.length > 1 && props.config.displaySort && totalMatching ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
     className: "wrapper--v26-finder__select--sort--mobile"
@@ -57415,15 +57419,16 @@ function Finder__Filters(props) {
     className: "v26-finder__filters__heading"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("span", {
     className: "v26-finder__filters__heading__text"
-  }, "Filter ".concat(props.config.summariseAs && props.config.summariseAs.plural))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("fieldset", null, !props.hasMounted && props.query.fixedParameters ? props.query.fixedParameters.map(function (param) {
+  }, "Filter ".concat((_props$config$summari = props.config.summariseAs) === null || _props$config$summari === void 0 ? void 0 : _props$config$summari.plural))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("fieldset", null, !props.hasMounted && ((_props$query$fixedPar = props.query.fixedParameters) === null || _props$query$fixedPar === void 0 ? void 0 : _props$query$fixedPar.map(function (param) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_finder_hiddenInput__WEBPACK_IMPORTED_MODULE_10__["default"], {
       key: param.name,
       name: param.name,
       value: param.value
     });
-  }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
     className: "wrapper--v26-finder_filters--filters"
-  }, props.config.facetLabels && props.config.facetLabels.map(function (facet) {
+  }, (_props$config$facetLa = props.config.facetLabels) === null || _props$config$facetLa === void 0 ? void 0 : _props$config$facetLa.map(function (facet) {
+    var _props$response$facet, _props$response, _props$config$facetLa2, _props$response2, _props$response3, _props$response$facet2, _props$response4, _props$config$facetLa3, _props$response$facet3, _props$response5, _props$config$facetLa4, _props$response$facet4, _props$response6, _props$config$facetLa5, _props$response$facet5, _props$response7, _props$config$facetLa6;
     if (dependencyMet(facet, props.query.facets)) {
       switch (facet.type) {
         case 'multiCheckbox':
@@ -57431,11 +57436,11 @@ function Finder__Filters(props) {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet = (_props$response = props.response) === null || _props$response === void 0 || (_props$response = _props$response.facets) === null || _props$response === void 0 ? void 0 : _props$response.filter(function (funnelbackFacet) {
               return funnelbackFacet.name.toLowerCase() === facet.funnelbackName.toLowerCase();
-            }) : [],
+            })) !== null && _props$response$facet !== void 0 ? _props$response$facet : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa2 = props.config.facetLabels) === null || _props$config$facetLa2 === void 0 ? void 0 : _props$config$facetLa2.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             mobile: props.mobile
@@ -57446,7 +57451,7 @@ function Finder__Filters(props) {
             facet: facet,
             query: props.query,
             update: props.update,
-            pastEventsResponse: props.response.extraSearches && props.response.extraSearches.past && props.response.extraSearches.past.response,
+            pastEventsResponse: (_props$response2 = props.response) === null || _props$response2 === void 0 || (_props$response2 = _props$response2.extraSearches) === null || _props$response2 === void 0 || (_props$response2 = _props$response2.past) === null || _props$response2 === void 0 ? void 0 : _props$response2.response,
             matrixState: props.matrixState
           });
         case "paramCheckBox":
@@ -57455,18 +57460,18 @@ function Finder__Filters(props) {
             facet: facet,
             query: props.query,
             update: props.update,
-            pastEventsResponse: props.response.extraSearches && props.response.extraSearches.past && props.response.extraSearches.past.response
+            pastEventsResponse: (_props$response3 = props.response) === null || _props$response3 === void 0 || (_props$response3 = _props$response3.extraSearches) === null || _props$response3 === void 0 || (_props$response3 = _props$response3.past) === null || _props$response3 === void 0 ? void 0 : _props$response3.response
           });
         case "eventSelect":
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement(_finder_eventSelect__WEBPACK_IMPORTED_MODULE_14__["default"], {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet2 = (_props$response4 = props.response) === null || _props$response4 === void 0 || (_props$response4 = _props$response4.facets) === null || _props$response4 === void 0 ? void 0 : _props$response4.filter(function (funnelbackFacet) {
               return funnelbackFacet.name === facet.funnelbackName;
-            }) : [],
+            })) !== null && _props$response$facet2 !== void 0 ? _props$response$facet2 : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa3 = props.config.facetLabels) === null || _props$config$facetLa3 === void 0 ? void 0 : _props$config$facetLa3.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             mobile: props.mobile
@@ -57476,11 +57481,11 @@ function Finder__Filters(props) {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet3 = (_props$response5 = props.response) === null || _props$response5 === void 0 || (_props$response5 = _props$response5.facets) === null || _props$response5 === void 0 ? void 0 : _props$response5.filter(function (funnelbackFacet) {
               return funnelbackFacet.name === facet.funnelbackName;
-            }) : [],
+            })) !== null && _props$response$facet3 !== void 0 ? _props$response$facet3 : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa4 = props.config.facetLabels) === null || _props$config$facetLa4 === void 0 ? void 0 : _props$config$facetLa4.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             mobile: props.mobile
@@ -57490,11 +57495,11 @@ function Finder__Filters(props) {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet4 = (_props$response6 = props.response) === null || _props$response6 === void 0 || (_props$response6 = _props$response6.facets) === null || _props$response6 === void 0 ? void 0 : _props$response6.filter(function (funnelbackFacet) {
               return funnelbackFacet.name === facet.funnelbackName;
-            }) : [],
+            })) !== null && _props$response$facet4 !== void 0 ? _props$response$facet4 : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa5 = props.config.facetLabels) === null || _props$config$facetLa5 === void 0 ? void 0 : _props$config$facetLa5.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             mobile: props.mobile
@@ -57504,11 +57509,11 @@ function Finder__Filters(props) {
             key: facet.meta,
             facet: facet,
             query: props.query,
-            responseFacet: props.response && props.response.facets ? props.response.facets.filter(function (funnelbackFacet) {
+            responseFacet: (_props$response$facet5 = (_props$response7 = props.response) === null || _props$response7 === void 0 || (_props$response7 = _props$response7.facets) === null || _props$response7 === void 0 ? void 0 : _props$response7.filter(function (funnelbackFacet) {
               return funnelbackFacet.name === facet.funnelbackName;
-            }) : [],
+            })) !== null && _props$response$facet5 !== void 0 ? _props$response$facet5 : [],
             update: props.update,
-            dependencies: props.config.facetLabels && props.config.facetLabels.filter(function (candidate) {
+            dependencies: (_props$config$facetLa6 = props.config.facetLabels) === null || _props$config$facetLa6 === void 0 ? void 0 : _props$config$facetLa6.filter(function (candidate) {
               return candidate.dependency === facet.meta;
             }),
             matrixState: props.matrixState
@@ -57519,9 +57524,7 @@ function Finder__Filters(props) {
     } else {
       return null;
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("p", {
-    className: "v26-finder__filters__nofilters"
-  }, "No filters are valid for the current query."), sort, submitSSR)));
+  }), sort, submitSSR)));
 }
 Finder__Filters.propTypes = {
   config: (prop_types__WEBPACK_IMPORTED_MODULE_19___default().object),
@@ -60404,7 +60407,7 @@ function Finder__Query(props) {
     htmlFor: inputId
   }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
     className: "v26-finder__query__input__wrapper"
-  }, searchInput, clear, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
+  }, searchInput, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
     type: "submit",
     className: "v26-finder__query__submit",
     onClick: function onClick() {
@@ -60415,7 +60418,7 @@ function Finder__Query(props) {
     "aria-hidden": "true"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
     className: "finder__query__submit__text"
-  }, searchButtonLabel)), suggestionsList))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
+  }, searchButtonLabel)), suggestionsList, clear))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
     className: "v26-finder__query"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
     className: "v26-finder__query__input"
@@ -61114,13 +61117,14 @@ function Finder__Results__Summary(props) {
       }
     }, "Reset query"))));
   } else {
+    var showingContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement((react__WEBPACK_IMPORTED_MODULE_2___default().Fragment), null, "showing", " ", props.totalMatching > props.numRanks && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement((react__WEBPACK_IMPORTED_MODULE_2___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, formatter.format(props.currStart)), "\u2013", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, props.currEnd && formatter.format(props.currEnd)), " ", "of", " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, formatter.format(props.totalMatching)), " ", result, props.query.query && " for \"".concat(props.query.query, "\""));
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "v26-finder__results__summary",
       ref: props.summaryHeadingRef
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("h2", {
       "aria-live": "polite",
       className: "v26-finder__results__summary__heading"
-    }, props.site !== "city" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement((react__WEBPACK_IMPORTED_MODULE_2___default().Fragment), null, props.query.query || Object.keys(props.query.facets).length > 0 ? "Matching" : "All", " ", result, " "), props.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, "showing", " ", props.totalMatching > props.numRanks && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement((react__WEBPACK_IMPORTED_MODULE_2___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, formatter.format(props.currStart)), "\u2013", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, props.currEnd && formatter.format(props.currEnd)), " ", "of", " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, formatter.format(props.totalMatching)), " ", result, props.query.query && " for \u201C".concat(props.query.query, "\u201D")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, "(showing", " ", props.totalMatching > props.numRanks && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement((react__WEBPACK_IMPORTED_MODULE_2___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, formatter.format(props.currStart)), "\u2013", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, props.currEnd && formatter.format(props.currEnd)), " ", "of", " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, formatter.format(props.totalMatching)), " ", result, props.query.query && " for \u201C".concat(props.query.query, "\u201D"), ")")), sort);
+    }, props.site !== "city" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement((react__WEBPACK_IMPORTED_MODULE_2___default().Fragment), null, props.query.query || Object.keys(props.query.facets).length > 0 ? "Matching" : "All", " ", result, " "), props.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, showingContent) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("span", null, "(", showingContent, ")")), sort);
   }
 }
 Finder__Results__Summary.propTypes = {
@@ -61685,7 +61689,7 @@ function baseURL(site) {
       return 'https://www.citystgeorges.ac.uk/web-services/dxp-fb';
   }
 }
-var dxpFindRootUrl = '/funnelback-dxp-find/_nocache',
+var dxpFindRootUrl = '/funnelback-dxp-find-test/_nocache',
   //remove test as it pointing to a test endpoint, but we want to point to the production endpoint,
   dxpSuggestRootUrl = '/funnelback-dxp-suggest',
   maximumSuggestions = 100,
