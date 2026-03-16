@@ -5396,9 +5396,7 @@ function Finder__Query(props) {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
       className: "v26-finder__query__submit__text"
     }, searchButtonLabel)), clear))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
-      className: "v26-finder__query danny",
-      "data-testid": "tetst",
-      "data-test": props.config.placeholder
+      className: "v26-finder__query"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
       className: "v26-finder__query__input"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
