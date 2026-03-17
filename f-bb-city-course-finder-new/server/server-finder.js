@@ -60462,12 +60462,17 @@ function Finder__Query(props) {
 
   // ✅ Interactive version after hydration
   return props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
+    className: "v26-finder__fullwidth__wrapper "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
+    className: "v26-finder__fullwidth__inner"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
     className: "v26-finder__query"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
+    className: "sr-only",
     htmlFor: inputId
   }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
     className: "v26-finder__query__input__wrapper"
-  }, searchInput, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
+  }, searchInput, clear, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
     type: "submit",
     className: "v26-finder__query__submit",
     onClick: function onClick() {
@@ -60477,8 +60482,8 @@ function Finder__Query(props) {
     className: "".concat(searchIconClassName, " v26-finder__query__submit__icon"),
     "aria-hidden": "true"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
-    className: "v26-finder__query__submit__text"
-  }, searchButtonLabel)), suggestionsList, clear))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
+    className: "finder__query__submit__text"
+  }, searchButtonLabel)), suggestionsList)))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
     className: "v26-finder__query"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
     className: "v26-finder__query__input"
