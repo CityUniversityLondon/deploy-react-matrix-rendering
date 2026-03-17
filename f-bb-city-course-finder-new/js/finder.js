@@ -2463,9 +2463,7 @@ function Finder__Filters(props) {
     } else {
       return null;
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("p", {
-    className: "v26-finder__filters__nofilters"
-  }, "No filters are valid for the current query."), sort, submitSSR)));
+  }), sort, submitSSR)));
 }
 Finder__Filters.propTypes = {
   config: (prop_types__WEBPACK_IMPORTED_MODULE_19___default().object),
