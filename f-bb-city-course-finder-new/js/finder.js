@@ -6569,7 +6569,9 @@ function Finder(props) {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
     className: "grid"
-  }, finderMain)))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement((react__WEBPACK_IMPORTED_MODULE_8___default().Fragment), null, QueryInput, finderMain));
+  }, finderMain)))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement((react__WEBPACK_IMPORTED_MODULE_8___default().Fragment), null, QueryInput, props.config.site && props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
+    className: "v26-finder__main"
+  }, finderMain) : finderMain));
 }
 Finder.propTypes = {
   config: (prop_types__WEBPACK_IMPORTED_MODULE_16___default().object).isRequired,
