@@ -9231,6 +9231,53 @@ module.exports = !fails(function () {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/function-bind.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/function-bind.js ***!
+  \*********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var uncurryThis = __webpack_require__(/*! ../internals/function-uncurry-this */ "./node_modules/core-js/internals/function-uncurry-this.js");
+var aCallable = __webpack_require__(/*! ../internals/a-callable */ "./node_modules/core-js/internals/a-callable.js");
+var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
+var hasOwn = __webpack_require__(/*! ../internals/has-own-property */ "./node_modules/core-js/internals/has-own-property.js");
+var arraySlice = __webpack_require__(/*! ../internals/array-slice */ "./node_modules/core-js/internals/array-slice.js");
+var NATIVE_BIND = __webpack_require__(/*! ../internals/function-bind-native */ "./node_modules/core-js/internals/function-bind-native.js");
+
+var $Function = Function;
+var concat = uncurryThis([].concat);
+var join = uncurryThis([].join);
+var factories = {};
+
+var construct = function (C, argsLength, args) {
+  if (!hasOwn(factories, argsLength)) {
+    var list = [];
+    var i = 0;
+    for (; i < argsLength; i++) list[i] = 'a[' + i + ']';
+    factories[argsLength] = $Function('C,a', 'return new C(' + join(list, ',') + ')');
+  } return factories[argsLength](C, args);
+};
+
+// `Function.prototype.bind` method implementation
+// https://tc39.es/ecma262/#sec-function.prototype.bind
+// eslint-disable-next-line es/no-function-prototype-bind -- detection
+module.exports = NATIVE_BIND ? $Function.bind : function bind(that /* , ...args */) {
+  var F = aCallable(this);
+  var Prototype = F.prototype;
+  var partArgs = arraySlice(arguments, 1);
+  var boundFunction = function bound(/* args... */) {
+    var args = concat(partArgs, arraySlice(arguments));
+    return this instanceof boundFunction ? construct(F, args.length, args) : F.apply(that, args);
+  };
+  if (isObject(Prototype)) boundFunction.prototype = Prototype;
+  return boundFunction;
+};
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/function-call.js":
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/internals/function-call.js ***!
@@ -13479,6 +13526,28 @@ if (String(new Date(NaN)) !== INVALID_DATE) {
     return value === value ? nativeDateToString(this) : INVALID_DATE;
   });
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.function.bind.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.function.bind.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+// TODO: Remove from `core-js@4`
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var bind = __webpack_require__(/*! ../internals/function-bind */ "./node_modules/core-js/internals/function-bind.js");
+
+// `Function.prototype.bind` method
+// https://tc39.es/ecma262/#sec-function.prototype.bind
+// eslint-disable-next-line es/no-function-prototype-bind -- detection
+$({ target: 'Function', proto: true, forced: Function.bind !== bind }, {
+  bind: bind
+});
 
 
 /***/ }),
@@ -60103,44 +60172,49 @@ Finder__Clear.propTypes = {
 /* harmony import */ var core_js_modules_es_date_to_primitive_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_date_to_primitive_js__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var core_js_modules_es_date_to_string_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.date.to-string.js */ "./node_modules/core-js/modules/es.date.to-string.js");
 /* harmony import */ var core_js_modules_es_date_to_string_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_date_to_string_js__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_es_object_define_properties_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.object.define-properties.js */ "./node_modules/core-js/modules/es.object.define-properties.js");
-/* harmony import */ var core_js_modules_es_object_define_properties_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties_js__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var core_js_modules_es_object_define_property_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/es.object.define-property.js */ "./node_modules/core-js/modules/es.object.define-property.js");
-/* harmony import */ var core_js_modules_es_object_define_property_js__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property_js__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
-/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_23__);
-/* harmony import */ var core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! core-js/modules/es.set.js */ "./node_modules/core-js/modules/es.set.js");
-/* harmony import */ var core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_24__);
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_26__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_27___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_27__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_28__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_32___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_32__);
-/* harmony import */ var _logic_funnelback__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../logic/funnelback */ "./src/shared/logic/funnelback.ts");
-/* harmony import */ var _finder_clear__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./finder__clear */ "./src/shared/components/query/finder__clear.tsx");
-/* harmony import */ var _logic_has_mounted__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../../logic/has-mounted */ "./src/shared/logic/has-mounted.ts");
+/* harmony import */ var core_js_modules_es_function_bind_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.function.bind.js */ "./node_modules/core-js/modules/es.function.bind.js");
+/* harmony import */ var core_js_modules_es_function_bind_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_bind_js__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.number.constructor.js */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor_js__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/es.object.assign.js */ "./node_modules/core-js/modules/es.object.assign.js");
+/* harmony import */ var core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var core_js_modules_es_object_define_properties_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/es.object.define-properties.js */ "./node_modules/core-js/modules/es.object.define-properties.js");
+/* harmony import */ var core_js_modules_es_object_define_properties_js__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_properties_js__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var core_js_modules_es_object_define_property_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! core-js/modules/es.object.define-property.js */ "./node_modules/core-js/modules/es.object.define-property.js");
+/* harmony import */ var core_js_modules_es_object_define_property_js__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_define_property_js__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptor.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptor_js__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
+/* harmony import */ var core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_own_property_descriptors_js__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_23__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_24__);
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string.js */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string_js__WEBPACK_IMPORTED_MODULE_25__);
+/* harmony import */ var core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! core-js/modules/es.set.js */ "./node_modules/core-js/modules/es.set.js");
+/* harmony import */ var core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_set_js__WEBPACK_IMPORTED_MODULE_26__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_27___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_27__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_28__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_29___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_29__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_30___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_30__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_34___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_34__);
+/* harmony import */ var _logic_funnelback__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../../logic/funnelback */ "./src/shared/logic/funnelback.ts");
+/* harmony import */ var _finder_clear__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./finder__clear */ "./src/shared/components/query/finder__clear.tsx");
+/* harmony import */ var _logic_has_mounted__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../../logic/has-mounted */ "./src/shared/logic/has-mounted.ts");
 
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -60156,6 +60230,8 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
 
 
 
@@ -60203,47 +60279,47 @@ var escapeKey = "Escape",
   arrowUp = "ArrowUp",
   arrowDown = "ArrowDown";
 function highlightQueryTerm(suggestion, partialQuery) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
     className: "sr-only"
-  }, suggestion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+  }, suggestion), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
     "aria-hidden": "true"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
     className: "v26-finder__suggestion"
   }, suggestion.slice(suggestion.indexOf(partialQuery.toLowerCase()), suggestion.indexOf(partialQuery.toLowerCase()) + partialQuery.length)), suggestion.slice(suggestion.indexOf(partialQuery.toLowerCase()) + partialQuery.length)));
 }
 function Finder__Query(props) {
   var searchIconClassName = props.config.site && props.config.site === "bayes" ? "fa fa-search fa-lg" : "fal fa-sharp fa-search";
   var searchButtonLabel = props.config.site && props.config.site === "city" ? "Search" : "Find";
-  var hasMounted = (0,_logic_has_mounted__WEBPACK_IMPORTED_MODULE_29__["default"])(); // ✅ detect client vs server
+  var hasMounted = (0,_logic_has_mounted__WEBPACK_IMPORTED_MODULE_31__["default"])(); // ✅ detect client vs server
 
-  var inputRef = (0,react__WEBPACK_IMPORTED_MODULE_28__.useRef)(null);
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_28__.useState)(props.query.query || ""),
+  var inputRef = (0,react__WEBPACK_IMPORTED_MODULE_30__.useRef)(null);
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_30__.useState)(props.query.query || ""),
     _useState2 = _slicedToArray(_useState, 2),
     partialQuery = _useState2[0],
     setPartialQuery = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_28__.useState)([]),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_30__.useState)([]),
     _useState4 = _slicedToArray(_useState3, 2),
     suggestions = _useState4[0],
     setSuggestions = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_28__.useState)(null),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_30__.useState)(null),
     _useState6 = _slicedToArray(_useState5, 2),
     call = _useState6[0],
     setCall = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_28__.useState)("v26-finder--" + props.query.collection),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_30__.useState)("v26-finder--" + props.query.collection),
     _useState8 = _slicedToArray(_useState7, 1),
     inputId = _useState8[0];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_28__.useState)(false),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_30__.useState)(false),
     _useState0 = _slicedToArray(_useState9, 2),
     showSuggestions = _useState0[0],
     setShowSuggestions = _useState0[1];
-  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_28__.useState)(""),
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_30__.useState)(""),
     _useState10 = _slicedToArray(_useState1, 2),
     activeSuggestionID = _useState10[0],
     setActiveSuggestionID = _useState10[1];
-  (0,react__WEBPACK_IMPORTED_MODULE_28__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_30__.useEffect)(function () {
     setPartialQuery(props.query.query);
   }, [props.query.query, props.updating]);
-  (0,react__WEBPACK_IMPORTED_MODULE_28__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_30__.useEffect)(function () {
     return function () {
       if (call) call.cancel();
     };
@@ -60280,7 +60356,7 @@ function Finder__Query(props) {
     props.update.query(newQuery);
     props.update.results(!props.update.updateState);
   };
-  var clear = partialQuery && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement(_finder_clear__WEBPACK_IMPORTED_MODULE_30__["default"], {
+  var clear = partialQuery && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement(_finder_clear__WEBPACK_IMPORTED_MODULE_32__["default"], {
     clear: function clear() {
       var value = inputRef.current ? inputRef.current.value : "";
       if (inputRef.current) inputRef.current.value = "";
@@ -60297,17 +60373,17 @@ function Finder__Query(props) {
     focusInput();
     submitForm(suggestion);
   };
-  var suggestionsList = suggestions && suggestions.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("ul", {
+  var suggestionsList = suggestions && suggestions.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("ul", {
     role: "listbox",
     "aria-label": "Search suggestions",
     "aria-activedescendant": activeSuggestionID,
     className: showSuggestions ? "v26-finder__query__suggestions show" : "v26-finder__query__suggestions hide"
   }, _toConsumableArray(new Set(suggestions)).slice(0, maximumSuggestions).map(function (suggestion, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("li", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("li", {
       key: suggestion,
       role: "option",
       id: inputId + "--" + i
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("button", {
       type: "button",
       onBlur: function onBlur() {
         setActiveSuggestionID("");
@@ -60374,21 +60450,33 @@ function Finder__Query(props) {
       }
     }, highlightQueryTerm(suggestion, partialQuery)));
   }));
-  var searchInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("input", {
-    autoComplete: "off",
+
+  //shared props between input
+  var inputSharedProps = {
     id: inputId,
     name: "query",
     placeholder: props.config.placeholder,
-    ref: inputRef,
     type: "text",
+    className: "v26-finder__query-input"
+  };
+
+  //Input for server side render
+  var fallbackInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("input", _extends({}, inputSharedProps, {
+    defaultValue: partialQuery,
+    autoComplete: "off"
+  }));
+
+  //Input for client side render
+  var searchInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("input", _extends({}, inputSharedProps, {
+    ref: inputRef,
     value: partialQuery,
     onKeyDown: function onKeyDown(e) {
       if (e.key === escapeKey) clearQuery();else if (e.key === arrowDown && suggestions.length > 0) {
         var _e$currentTarget$pare2, _e$currentTarget$pare3;
         e.preventDefault();
-        var button = (_e$currentTarget$pare2 = e.currentTarget.parentElement) === null || _e$currentTarget$pare2 === void 0 ? void 0 : _e$currentTarget$pare2.querySelector(".v26-finder__query__suggestions button");
+        var button = (_e$currentTarget$pare2 = e.currentTarget.parentElement) === null || _e$currentTarget$pare2 === void 0 ? void 0 : _e$currentTarget$pare2.querySelector(".finder__query__suggestions button");
         button === null || button === void 0 || button.focus();
-        setActiveSuggestionID(((_e$currentTarget$pare3 = e.currentTarget.parentElement) === null || _e$currentTarget$pare3 === void 0 || (_e$currentTarget$pare3 = _e$currentTarget$pare3.querySelector(".v26-finder__query__suggestions li")) === null || _e$currentTarget$pare3 === void 0 ? void 0 : _e$currentTarget$pare3.id) || "");
+        setActiveSuggestionID(((_e$currentTarget$pare3 = e.currentTarget.parentElement) === null || _e$currentTarget$pare3 === void 0 || (_e$currentTarget$pare3 = _e$currentTarget$pare3.querySelector(".finder__query__suggestions li")) === null || _e$currentTarget$pare3 === void 0 ? void 0 : _e$currentTarget$pare3.id) || "");
       }
     },
     onFocus: function onFocus() {
@@ -60403,7 +60491,7 @@ function Finder__Query(props) {
       setSuggestions([]);
       if (call) call.cancel();
       if (val) {
-        var _ref = (0,_logic_funnelback__WEBPACK_IMPORTED_MODULE_31__.suggest)(props.query.collection, val, props.config.site ? props.config.site : undefined),
+        var _ref = (0,_logic_funnelback__WEBPACK_IMPORTED_MODULE_33__.suggest)(props.query.collection, val, props.config.site ? props.config.site : undefined),
           _ref2 = _slicedToArray(_ref, 2),
           promise = _ref2[0],
           newCall = _ref2[1];
@@ -60417,102 +60505,103 @@ function Finder__Query(props) {
         setSuggestions([]);
       }
     }
-  });
+  }));
 
   // ✅ Server-side fallback
   if (!hasMounted) {
-    return props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
+    return props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
+      className: "v26-finder__fullwidth__wrapper "
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
+      className: "v26-finder__fullwidth__inner"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
       className: "v26-finder__query"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
-      htmlFor: inputId
-    }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
-      className: "v26-finder__query__input__wrapper"
-    }, searchInput, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
-      type: "submit",
-      className: "v26-finder__query__submit"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
-      className: "".concat(searchIconClassName, " v26-finder__query__submit__icon"),
-      "aria-hidden": "true"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
-      className: "v26-finder__query__submit__text"
-    }, searchButtonLabel)), clear))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
-      className: "v26-finder__query"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
-      className: "v26-finder__query__input"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("label", {
       className: "sr-only",
       htmlFor: inputId
-    }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("input", {
-      type: "text",
-      id: inputId,
-      name: "query",
-      className: "v26-finder__query-input",
-      placeholder: props.config.placeholder,
-      defaultValue: partialQuery
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
+    }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
+      className: "v26-finder__query__input__wrapper"
+    }, fallbackInput, clear, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("button", {
+      type: "submit",
+      className: "v26-finder__query__submit",
+      onClick: function onClick() {
+        return submitForm(inputRef.current ? inputRef.current.value : "");
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
+      className: "".concat(searchIconClassName, " v26-finder__query__submit__icon"),
+      "aria-hidden": "true"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
+      className: "finder__query__submit__text"
+    }, searchButtonLabel)))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
+      className: "v26-finder__query"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
+      className: "v26-finder__query__input"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("label", {
+      className: "sr-only",
+      htmlFor: inputId
+    }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), fallbackInput), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("button", {
       type: "submit",
       className: "v26-finder__query__submit"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
       className: "fal fa-sharp fa-search finder__query__submit__icon",
       "aria-hidden": "true"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
       className: "v26-finder__query__submit__text"
     }, searchButtonLabel))));
   }
 
   // ✅ Interactive version after hydration
-  return props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
+  return props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
     className: "v26-finder__fullwidth__wrapper "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
     className: "v26-finder__fullwidth__inner"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
     className: "v26-finder__query"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("label", {
     className: "sr-only",
     htmlFor: inputId
-  }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
+  }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
     className: "v26-finder__query__input__wrapper"
-  }, searchInput, clear, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
+  }, searchInput, clear, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("button", {
     type: "submit",
     className: "v26-finder__query__submit",
     onClick: function onClick() {
       return submitForm(inputRef.current ? inputRef.current.value : "");
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
     className: "".concat(searchIconClassName, " v26-finder__query__submit__icon"),
     "aria-hidden": "true"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
     className: "finder__query__submit__text"
-  }, searchButtonLabel)), suggestionsList)))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("fieldset", {
+  }, searchButtonLabel)), suggestionsList)))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
     className: "v26-finder__query"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
     className: "v26-finder__query__input"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
     className: "v26-finder__query__icon--wrapper"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
     className: "finder__icon ".concat(searchIconClassName, " icon"),
     "aria-hidden": "true"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("label", {
     className: "sr-only",
     htmlFor: inputId
-  }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), searchInput, suggestionsList, clear), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("button", {
+  }, "Search ".concat(props.config.summariseAs && props.config.summariseAs.plural)), searchInput, suggestionsList, clear), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("button", {
     type: "submit",
     className: "v26-finder__query__submit",
     onClick: function onClick() {
       return submitForm(inputRef.current ? inputRef.current.value : "");
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
     className: "".concat(searchIconClassName, " v26-finder__query__submit__icon"),
     "aria-hidden": "true"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("span", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
     className: "v26-finder__query__submit__text"
   }, searchButtonLabel))));
 }
 Finder__Query.propTypes = {
-  config: (prop_types__WEBPACK_IMPORTED_MODULE_32___default().object),
-  query: (prop_types__WEBPACK_IMPORTED_MODULE_32___default().object),
-  update: (prop_types__WEBPACK_IMPORTED_MODULE_32___default().object),
-  updating: (prop_types__WEBPACK_IMPORTED_MODULE_32___default().bool)
+  config: (prop_types__WEBPACK_IMPORTED_MODULE_34___default().object),
+  query: (prop_types__WEBPACK_IMPORTED_MODULE_34___default().object),
+  update: (prop_types__WEBPACK_IMPORTED_MODULE_34___default().object),
+  updating: (prop_types__WEBPACK_IMPORTED_MODULE_34___default().bool)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Finder__Query);
 
