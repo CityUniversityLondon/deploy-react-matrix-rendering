@@ -60493,12 +60493,15 @@ function Finder__Query(props) {
     ref: inputRef,
     value: partialQuery,
     onKeyDown: function onKeyDown(e) {
+      console.log(e.key);
       if (e.key === escapeKey) clearQuery();else if (e.key === arrowDown && suggestions.length > 0) {
         var _e$currentTarget$pare2, _e$currentTarget$pare3;
         e.preventDefault();
-        var button = (_e$currentTarget$pare2 = e.currentTarget.parentElement) === null || _e$currentTarget$pare2 === void 0 ? void 0 : _e$currentTarget$pare2.querySelector(".finder__query__suggestions button");
+        console.log(e.currentTarget.parentElement);
+        var button = (_e$currentTarget$pare2 = e.currentTarget.parentElement) === null || _e$currentTarget$pare2 === void 0 ? void 0 : _e$currentTarget$pare2.querySelector(".v26-finder__query__suggestions button");
+        console.log(button);
         button === null || button === void 0 || button.focus();
-        setActiveSuggestionID(((_e$currentTarget$pare3 = e.currentTarget.parentElement) === null || _e$currentTarget$pare3 === void 0 || (_e$currentTarget$pare3 = _e$currentTarget$pare3.querySelector(".finder__query__suggestions li")) === null || _e$currentTarget$pare3 === void 0 ? void 0 : _e$currentTarget$pare3.id) || "");
+        setActiveSuggestionID(((_e$currentTarget$pare3 = e.currentTarget.parentElement) === null || _e$currentTarget$pare3 === void 0 || (_e$currentTarget$pare3 = _e$currentTarget$pare3.querySelector(".v26-finder__query__suggestions li")) === null || _e$currentTarget$pare3 === void 0 ? void 0 : _e$currentTarget$pare3.id) || "");
       }
     },
     onFocus: function onFocus() {
