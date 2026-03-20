@@ -5263,6 +5263,9 @@ function Finder__Query(props) {
       var value = inputRef.current ? inputRef.current.value : "";
       if (inputRef.current) inputRef.current.value = "";
       setPartialQuery("");
+      setShowSuggestions(false);
+      setActiveSuggestionID("");
+      setSuggestions([]);
       if (value === props.query.query) {
         clearQuery();
       }
