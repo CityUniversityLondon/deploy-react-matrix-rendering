@@ -57803,7 +57803,26 @@ function Finder__FiltersMobile(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("span", {
     className: "far fa-times icon",
     "aria-hidden": "true"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("div", {
+  })), !props.hasMounted ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement((react__WEBPACK_IMPORTED_MODULE_17___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("input", {
+    type: "checkbox",
+    id: "toggleFilters",
+    className: "v26-finder__ssr__toggle sr-only",
+    "aria-controls": "filtersPanel",
+    "aria-label": "Toggle filters"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("label", {
+    className: "wrapper--v26-finder__filters--mobile__toggle v26-finder__ssr__toggle-label",
+    htmlFor: "toggleFilters"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("span", {
+    className: "far fa-sharp fa-sliders-h icon",
+    "aria-hidden": "true"
+  }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("span", {
+    className: "v26-finder__ssr__toggle-text",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("span", {
+    className: "v26-finder__ssr__toggle__text--show"
+  }, "Show filters"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("span", {
+    className: "v26-finder__ssr__toggle__text--hide"
+  }, "Hide filters")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("div", {
     className: "wrapper--v26-finder__filters__header"
   }, toggle, !noFacetsSelected && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement(_filters_finder_reset__WEBPACK_IMPORTED_MODULE_20__["default"], {
     clear: props.clear,
@@ -57812,7 +57831,8 @@ function Finder__FiltersMobile(props) {
     label: "Clear all filters",
     site: props.config.site || "city"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("div", {
-    className: "wrapper--v26-finder__filters--mobile__filters"
+    className: "wrapper--v26-finder__filters--mobile__filters",
+    id: "filtersPanel"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("div", {
     className: "wrapper--v26-finder__filters--mobile__filters__content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement(_finder_filters_city__WEBPACK_IMPORTED_MODULE_21__["default"], {
