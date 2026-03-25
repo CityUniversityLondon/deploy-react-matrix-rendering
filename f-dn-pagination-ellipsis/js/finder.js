@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (finder.dataset.config) {
           (0,_shared_logic_funnelback__WEBPACK_IMPORTED_MODULE_8__.finderConfig)(finder.dataset.config).then(function (config) {
             var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_7__.createRoot)(finder);
+            // @ts-expect-error: Unreachable code error
             root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement(_shared_forms_finder_finder__WEBPACK_IMPORTED_MODULE_9__["default"], {
               config: config,
               element: finder
