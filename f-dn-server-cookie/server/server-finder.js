@@ -55954,7 +55954,7 @@ Finder__Results__Course.propTypes = {
 
 var externalSiteUrl = ["www.citystgeorges.ac.uk"];
 function Finder__Results__Coursev26(props) {
-  var _props$details$listMe, _props$details$listMe2, _props$details$listMe3, _props$details$listMe4, _props$details$listMe5, _props$query$facets, _props$query$facets2, _props$details$listMe6, _props$details$listMe7, _props$details$listMe8, _props$details;
+  var _props$details$listMe, _props$details$listMe2, _props$details$listMe3, _props$details$listMe4, _props$details$listMe5, _props$query$facets, _props$details$listMe6, _props$details$listMe7, _props$details$listMe8, _props$details$listMe9, _props$details;
   var subtitle = ((_props$details$listMe = props.details.listMetadata) === null || _props$details$listMe === void 0 || (_props$details$listMe = _props$details$listMe.type) === null || _props$details$listMe === void 0 ? void 0 : _props$details$listMe[0]) || ((_props$details$listMe2 = props.details.listMetadata) === null || _props$details$listMe2 === void 0 || (_props$details$listMe2 = _props$details$listMe2.level) === null || _props$details$listMe2 === void 0 ? void 0 : _props$details$listMe2[0]) || null,
     award = props.details.listMetadata && props.details.listMetadata.qualification && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("p", {
       className: "card__tag"
@@ -55972,13 +55972,13 @@ function Finder__Results__Coursev26(props) {
       "aria-hidden": "true"
     }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, "Method", props.details.listMetadata.method.length > 1 && "s", " of study:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, (0,_util__WEBPACK_IMPORTED_MODULE_15__.uppercaseFirstLetterLowercaseRest)(Array.from(new Set(props.details.listMetadata.method)).join("|") // Remove any duplicates & format
     ).split("|").join(", "))),
-    location = props.details.listMetadata && String(props.details.listMetadata.location).toLowerCase() !== "tooting" ? props.details.listMetadata.location && ((_props$query$facets2 = props.query.facets) === null || _props$query$facets2 === void 0 ? void 0 : _props$query$facets2.location) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("p", {
+    location = ((_props$details$listMe6 = props.details.listMetadata) === null || _props$details$listMe6 === void 0 ? void 0 : _props$details$listMe6.location) && String(props.details.listMetadata.location).toLowerCase() !== "tooting" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("p", {
       className: "card__tag"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", {
       className: "fas fa-fw fa-map-marker-alt icon",
       "aria-hidden": "true"
-    }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, "Location:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("strong", null, props.details.listMetadata.location.join("|") === "Online|Online" ? "Online" : props.details.listMetadata.location.join(", ")))) : null,
-    school = ((_props$details$listMe6 = props.details.listMetadata) === null || _props$details$listMe6 === void 0 ? void 0 : _props$details$listMe6.school) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("p", {
+    }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, "Location:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("strong", null, props.details.listMetadata.location.join("|") === "Online|Online" ? "Online" : props.details.listMetadata.location.join(", ")))),
+    school = ((_props$details$listMe7 = props.details.listMetadata) === null || _props$details$listMe7 === void 0 ? void 0 : _props$details$listMe7.school) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("p", {
       className: "card__tag"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", {
       className: "fas fa-fw fa-sharp fa-university icon",
@@ -55998,7 +55998,7 @@ function Finder__Results__Coursev26(props) {
       "aria-hidden": "true"
     }), " ", "Tooting Campus")) : null,
     // City and Business School use different metadata values; check for both
-    clearing = ((_props$details$listMe7 = props.details.listMetadata) === null || _props$details$listMe7 === void 0 ? void 0 : _props$details$listMe7.clearing) && ["Yes", "yes"].includes(props.details.listMetadata.clearing[0]) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("div", {
+    clearing = ((_props$details$listMe8 = props.details.listMetadata) === null || _props$details$listMe8 === void 0 ? void 0 : _props$details$listMe8.clearing) && ["Yes", "yes"].includes(props.details.listMetadata.clearing[0]) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("div", {
       className: "card__label card--course__label--clearing"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("p", {
       className: "card__label card--course__label--clearing"
@@ -56017,7 +56017,7 @@ function Finder__Results__Coursev26(props) {
 
   // compute entryYears separately; ensure we don't rely on potentially undefined metadata
   var entryYears = null;
-  var _entryyears = (_props$details$listMe8 = props.details.listMetadata) === null || _props$details$listMe8 === void 0 ? void 0 : _props$details$listMe8.entryyears;
+  var _entryyears = (_props$details$listMe9 = props.details.listMetadata) === null || _props$details$listMe9 === void 0 ? void 0 : _props$details$listMe9.entryyears;
   if (_entryyears && _entryyears.length > 0) {
     entryYears = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("p", {
       className: "card__tag"
