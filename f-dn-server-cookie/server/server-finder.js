@@ -57868,8 +57868,9 @@ function Finder__Checkbox(props) {
       props.update.results(!props.update.updateState);
     };
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
-      className: "v26-finder__filter v26-finder__checkbox"
+      className: "v26-finder_filters__checkbox_wrap"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("input", {
+      className: "v26-finder_filters__checkbox",
       type: "checkbox",
       id: "meta_".concat(props.facet.meta, "_sand--").concat(randomNumber),
       name: "meta_".concat(props.facet.meta, "_sand"),
@@ -57878,16 +57879,8 @@ function Finder__Checkbox(props) {
         return toggleFacet();
       },
       checked: toggleChecked
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("div", {
-      className: "v26-finder__checkbox__indicator v26-finder__checkbox__indicator",
-      "aria-hidden": "true",
-      onClick: function onClick() {
-        return toggleFacet();
-      }
-    }, toggleChecked ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("span", {
-      className: "fa fa-fw fas fa-check icon"
-    }) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("label", {
-      className: "v26-finder__filters__label--always",
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_6___default().createElement("label", {
+      className: "v26-finder_filters__label v26-finder_filters__label--always",
       htmlFor: "meta_".concat(props.facet.meta, "_sand--").concat(randomNumber)
     }, props.facet.name, !toggleChecked && responseFacetValue && " (" + responseFacetValue[0].count + ")"));
   } else {
