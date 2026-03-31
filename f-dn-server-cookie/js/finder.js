@@ -5407,11 +5407,7 @@ function Finder__Query(props) {
 
   // ✅ Server-side fallback
   if (!hasMounted) {
-    return props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
-      className: "v26-finder__fullwidth__wrapper "
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
-      className: "v26-finder__fullwidth__inner"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
+    return props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
       className: "v26-finder__query"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("label", {
       className: "sr-only",
@@ -5429,7 +5425,7 @@ function Finder__Query(props) {
       "aria-hidden": "true"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
       className: "v26-finder__query__submit__text"
-    }, searchButtonLabel)))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
+    }, searchButtonLabel))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
       className: "v26-finder__query"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
       className: "v26-finder__query__input"
@@ -5448,11 +5444,7 @@ function Finder__Query(props) {
   }
 
   // ✅ Interactive version after hydration
-  return props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
-    className: "v26-finder__fullwidth__wrapper "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
-    className: "v26-finder__fullwidth__inner"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
+  return props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
     className: "v26-finder__query"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("label", {
     className: "sr-only",
@@ -5470,7 +5462,7 @@ function Finder__Query(props) {
     "aria-hidden": "true"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
     className: "v26-finder__query__submit__text"
-  }, searchButtonLabel)), suggestionsList)))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
+  }, searchButtonLabel)), suggestionsList))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("fieldset", {
     className: "v26-finder__query"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
     className: "v26-finder__query__input"
