@@ -58107,14 +58107,14 @@ function Finder__ClearFilterTag(props) {
   var clearFilterTag = value && props.matrixState ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_26___default().createElement("a", {
     key: "".concat(facet.meta, "-").concat(value),
     "aria-label": "Clear the filter ".concat(value),
-    className: "v26-finder__clear-filter-tag",
+    className: "v26-finder__clear-filter-tag v26-finder__clear-filter-tag",
     href: (0,_logic_hyper_link__WEBPACK_IMPORTED_MODULE_27__.hyperLink)(query, facet, undefined, undefined, value, config)
   }, facetValue ? facetValue.label : (0,_util__WEBPACK_IMPORTED_MODULE_28__.capitalizeFirstLetter)(value), props.site === 'city' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_26___default().createElement("span", {
     className: "fa-sharp fa-solid fa-xmark icon"
   })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_26___default().createElement("button", {
     key: "".concat(facet.meta, "-").concat(value),
     "aria-label": "Clear the filter ".concat(value),
-    className: "v26-finder__clear-filter-tag",
+    className: "v26-finder__clear-filter-tag outline-cta--bright-rounded-border",
     onClick: function onClick() {
       return updateQuery(value);
     }
