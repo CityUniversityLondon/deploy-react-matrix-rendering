@@ -144,7 +144,7 @@ function Finder__Results__Accommodation(props) {
     },
     thumbnail = props.details && props.details.listMetadata && props.details.listMetadata.thumbnail && props.details.listMetadata.thumbnail[0] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_12___default().createElement("img", {
       src: props.details.listMetadata.thumbnail[0],
-      alt: "TEST WALTER",
+      alt: "",
       className: "card__thumbnail"
     }),
     level = props.details && props.details.listMetadata && props.details.listMetadata.level && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_12___default().createElement("p", {
