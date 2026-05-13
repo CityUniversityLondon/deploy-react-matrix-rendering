@@ -59431,14 +59431,10 @@ function Finder__MultiCheckbox(props) {
     update.results(!update.updateState);
   };
   var multiCheckbox = ((_facet$values = facet.values) === null || _facet$values === void 0 ? void 0 : _facet$values.map(function (value) {
-    var _props$responseFacet$2;
     var val = normalize(value.data);
     var isChecked = selectedValues.includes(val);
     var disable = responseFacets.includes(val) ? false : true;
     var filterValues = facet.filterValues;
-    var responseFacetDetails = (_props$responseFacet$2 = props.responseFacet[0]) === null || _props$responseFacet$2 === void 0 || (_props$responseFacet$2 = _props$responseFacet$2.allValues) === null || _props$responseFacet$2 === void 0 ? void 0 : _props$responseFacet$2.filter(function (responseFacetValue) {
-      return responseFacetValue.data.toLowerCase() === val;
-    });
     var HTMLFilter = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
       key: "".concat(facet.meta, "-").concat(String(value.data)),
       className: "v26-finder_filters__checkbox_wrap"
