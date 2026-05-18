@@ -5962,10 +5962,6 @@ function Finder__Pagination(props) {
     newQuery.interacted = true;
     props.update.query(newQuery);
     props.update.results(!props.update.updateState);
-    window.scrollTo({
-      top: 0,
-      behavior: "instant"
-    });
   };
   pages.push(currentPage === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     key: "previousPage",
