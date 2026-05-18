@@ -5669,7 +5669,7 @@ function Finder__Query(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("div", {
     className: "v26-finder__query__icon--wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("span", {
-    className: "finder__icon ".concat(searchIconClassName, " icon"),
+    className: "v26-finder__icon ".concat(searchIconClassName, " icon"),
     "aria-hidden": "true"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("label", {
     className: "sr-only",
