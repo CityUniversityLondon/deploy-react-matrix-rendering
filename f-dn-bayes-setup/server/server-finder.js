@@ -61754,11 +61754,7 @@ function Finder(props) {
     }
   }, props.config.site && props.config.site === "bayes" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement((react__WEBPACK_IMPORTED_MODULE_8___default().Fragment), null, topSectionQueryInput, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
     className: "v26-finder__main"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
-    className: "grid"
-  }, finderMain)))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement((react__WEBPACK_IMPORTED_MODULE_8___default().Fragment), null, QueryInput, props.config.site && props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
+  }, finderMain)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement((react__WEBPACK_IMPORTED_MODULE_8___default().Fragment), null, QueryInput, props.config.site && props.config.site === "city" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_8___default().createElement("div", {
     className: "v26-finder__main"
   }, finderMain) : finderMain));
 }
