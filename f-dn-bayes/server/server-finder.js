@@ -59400,11 +59400,11 @@ function Finder__MultiCheckbox(props) {
     var disable = responseFacets.includes(val) ? false : true;
     var filterValues = facet.filterValues;
     var HTMLFilter = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_31___default().createElement("div", {
-      key: "".concat(facet.meta, "-").concat(String(value.data)),
+      key: "checkbox-".concat(facet.meta, "-").concat(String(value.data)),
       className: "v26-finder_filters__checkbox_wrap"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_31___default().createElement("input", {
       type: "checkbox",
-      id: val.replace(/\s+/g, '-'),
+      id: "checkbox-".concat(facet.meta, "-").concat(String(value.data)),
       name: "f\xB1".concat(facet.facetName, "|").concat(facet.meta, "[]"),
       className: "v26-finder_filters__checkbox",
       value: val,
@@ -59416,7 +59416,7 @@ function Finder__MultiCheckbox(props) {
       "data-test": isChecked
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_31___default().createElement("label", {
       className: "v26-finder_filters__label v26-finder_filters__label--always",
-      htmlFor: val.replace(/\s+/g, '-')
+      htmlFor: "checkbox-".concat(facet.meta, "-").concat(String(value.data))
     }, value.label));
     if (filterValues) return disable ? null : HTMLFilter;
     return HTMLFilter;
