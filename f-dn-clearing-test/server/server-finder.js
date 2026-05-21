@@ -56133,7 +56133,12 @@ function Finder__Results__Coursev26(props) {
       return props.details.listMetadata && props.details.listMetadata.level && props.details.listMetadata.level.indexOf(s) >= 0;
     }) || props.query.query.indexOf(props.details.listMetadata.code[0]) >= 0) ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("p", {
       className: "card__tag"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("span", null, "UCAS code", props.details.listMetadata.code.length > 1 && 's', ":"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("strong", null, props.details.listMetadata.code.join('/')))) : null;
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("span", null, "UCAS code", props.details.listMetadata.code.length > 1 && 's', ":"), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("strong", null, props.details.listMetadata.code.join('/')))) : null,
+    cardHeading = props.query.query || props.details.title ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("h3", {
+      className: "card__heading"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("a", {
+      href: props.details.liveUrl
+    }, props.query.query ? (0,_results_formatLabel__WEBPACK_IMPORTED_MODULE_25__["default"])(props.details.title, props.query.query) : props.details.title, external)) : null;
 
   // compute entryYears separately; ensure we don't rely on potentially undefined metadata
   var entryYears = null;
@@ -56160,13 +56165,9 @@ function Finder__Results__Coursev26(props) {
     className: "wrapper--card__label__details"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("div", {
     className: "card__details__text"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("div", {
+  }, clearing ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("div", {
     className: "card__heading-wrapper"
-  }, clearing, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("h3", {
-    className: "card__heading"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("a", {
-    href: props.details.liveUrl
-  }, props.query.query ? (0,_results_formatLabel__WEBPACK_IMPORTED_MODULE_25__["default"])(props.details.title, props.query.query) : props.details.title, external))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("p", {
+  }, clearing, cardHeading) : cardHeading, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("p", {
     className: "card__type"
   }, props.query.query && subtitle ? (0,_results_formatLabel__WEBPACK_IMPORTED_MODULE_25__["default"])(subtitle, props.query.query) : subtitle && subtitle), description, stGeorgesLabel, duration || courseCode ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("div", {
     className: "card--v26-course__duration-and-code"
