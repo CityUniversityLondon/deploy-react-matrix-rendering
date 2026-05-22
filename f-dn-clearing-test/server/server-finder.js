@@ -56055,7 +56055,7 @@ function Finder__Results__Coursev26(props) {
           schoolClassName = "v26-course__school-icon--spga";
           break;
         case "the city law school":
-          schoolClassName = "v26-course__school-icon--tcls";
+          schoolClassName = "v26-course__school-icon--cls";
           break;
         case "school of science and technology":
           schoolClassName = "v26-course__school-icon--stt";
