@@ -1081,7 +1081,7 @@ function Finder__Results__Coursev26(props) {
       "aria-hidden": "true"
     }), " ", "Tooting Campus")) : null,
     // City and Business School use different metadata values; check for both
-    clearing = ((_props$details$listMe1 = props.details.listMetadata) === null || _props$details$listMe1 === void 0 ? void 0 : _props$details$listMe1.clearing) && ["No", "no"].includes(props.details.listMetadata.clearing[0]) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("div", {
+    clearing = ((_props$details$listMe1 = props.details.listMetadata) === null || _props$details$listMe1 === void 0 ? void 0 : _props$details$listMe1.clearing) && ["Clearing", "clearing"].includes(props.details.listMetadata.clearing[0]) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("div", {
       className: "card__label card--v26-course__label--clearing"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("p", null, "Clearing")),
     external = !externalSiteUrl.some(function (s) {
