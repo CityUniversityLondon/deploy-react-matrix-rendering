@@ -979,7 +979,6 @@ var sortLocations = function sortLocations(locations) {
 };
 function Finder__Results__Coursev26(props) {
   var _props$details$listMe, _props$details$listMe2, _props$details$listMe4, _props$details$listMe5, _props$details$listMe6, _props$details$listMe7, _props$details$listMe8, _props$query$facets, _props$details$listMe9, _props$details$listMe0, _props$details$listMe1, _props$details$listMe10, _props$details;
-  console.log('TEST');
   var locationClassName = null,
     schoolClassName = null;
   if ((_props$details$listMe = props.details.listMetadata) !== null && _props$details$listMe !== void 0 && _props$details$listMe.location) {
@@ -989,7 +988,6 @@ function Finder__Results__Coursev26(props) {
       }).join('-'));
     } else {
       var _location = String(props.details.listMetadata.location).toLowerCase().trim();
-      console.log(_location);
       switch (_location) {
         case "online":
           locationClassName = "v26-course__location-icon--online";
