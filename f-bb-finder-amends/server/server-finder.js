@@ -56148,9 +56148,9 @@ function Finder__Results__Coursev26(props) {
       var href = idx > 0 ? "".concat(baseUrl, "/").concat(year) : baseUrl;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement((react__WEBPACK_IMPORTED_MODULE_23___default().Fragment), {
         key: year
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("strong", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("a", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("a", {
         href: href
-      }, year)), idx < _entryyears.length - 1 ? ', ' : '');
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("strong", null, year)), idx < _entryyears.length - 1 ? ', ' : '');
     })));
   }
   var description = ((_props$details = props.details) === null || _props$details === void 0 || (_props$details = _props$details.listMetadata) === null || _props$details === void 0 || (_props$details = _props$details.c) === null || _props$details === void 0 ? void 0 : _props$details[0]) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_23___default().createElement("p", {
