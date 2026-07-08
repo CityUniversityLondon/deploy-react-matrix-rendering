@@ -8376,7 +8376,6 @@ function getFacetParams(facets, params) {
       _iterator3.f();
     }
   }
-  console.log('getFacetParams result:', result);
   return result;
 }
 
