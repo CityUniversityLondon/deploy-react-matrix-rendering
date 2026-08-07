@@ -6509,7 +6509,7 @@ function Finder__Results(props) {
   }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement("span", null, "Updating ", props.summariseAs && props.summariseAs.plural, "\u2026"));
   var resultsClass = "resultsVariant" in props.config ? "v26-finder__results__list v26-finder__results__list--".concat(props.config.resultsVariant) : "finder__results__list";
   if (props.response) {
-    var summary = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_finder_results_summary__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    var summary = props.config.disableSummary ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default().createElement(_finder_results_summary__WEBPACK_IMPORTED_MODULE_4__["default"], {
       clear: props.clear,
       config: props.config,
       currEnd: props.response.summary.currEnd,
