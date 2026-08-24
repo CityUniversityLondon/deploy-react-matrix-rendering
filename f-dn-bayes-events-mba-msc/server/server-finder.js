@@ -57281,7 +57281,7 @@ function Finder__Filters(props) {
     } else {
       return null;
     }
-  }), clearFiltersDesktop, sort, submitSSR)));
+  }), sort, submitSSR)));
 }
 Finder__Filters.propTypes = {
   config: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().object),
@@ -57481,7 +57481,7 @@ function Finder__FiltersMobile(props) {
     },
     "data-filters-applied": Object.keys(props.query.facets).length !== 0 || props.config.displaySort && props.config.sort[0].type !== props.query.sortType
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("span", {
-    className: "far fa-sharp fa-sliders-h icon",
+    className: "fa-solid fa-sliders",
     "aria-hidden": "true"
   }), " ", filtersCount));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("div", {
@@ -58967,9 +58967,11 @@ function Finder__ClearFilterTag(props) {
     onClick: function onClick() {
       return updateQuery(value);
     }
-  }, facetValue ? facetValue.label : (0,_util__WEBPACK_IMPORTED_MODULE_28__.capitalizeFirstLetter)(value), props.site === 'city' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_26___default().createElement("span", {
+  }, facetValue ? facetValue.label : (0,_util__WEBPACK_IMPORTED_MODULE_28__.capitalizeFirstLetter)(value), props.site === 'city' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_26___default().createElement("span", {
     className: "fa-sharp fa-solid fa-xmark icon"
-  }));
+  }) : props.site === 'bayes' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_26___default().createElement("span", {
+    className: "fa fa-times icon"
+  }) : null);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_26___default().createElement("div", {
     className: "v26-finder__filter v26-finder__tag"
   }, clearFilterTag);
