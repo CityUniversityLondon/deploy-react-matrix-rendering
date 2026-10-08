@@ -1998,19 +1998,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_26__);
-/* harmony import */ var _finder_select__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../finder__select */ "./src/shared/components/filters/finder__select.tsx");
-/* harmony import */ var _finder_multiCheckbox__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../finder__multiCheckbox */ "./src/shared/components/filters/finder__multiCheckbox.tsx");
-/* harmony import */ var _finder_eventSelect__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../finder__eventSelect */ "./src/shared/components/filters/finder__eventSelect.tsx");
-/* harmony import */ var _finder_checkbox__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../finder__checkbox */ "./src/shared/components/filters/finder__checkbox.tsx");
-/* harmony import */ var _finder_paramCheckbox__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../finder__paramCheckbox */ "./src/shared/components/filters/finder__paramCheckbox.tsx");
-/* harmony import */ var _finder_eventCheckbox__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../finder__eventCheckbox */ "./src/shared/components/filters/finder__eventCheckbox.tsx");
-/* harmony import */ var _finder_hiddenInput__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../finder__hiddenInput */ "./src/shared/components/filters/finder__hiddenInput.tsx");
-/* harmony import */ var _finder_tag__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../finder__tag */ "./src/shared/components/filters/finder__tag.tsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_25__);
+/* harmony import */ var _finder_select__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../finder__select */ "./src/shared/components/filters/finder__select.tsx");
+/* harmony import */ var _finder_multiCheckbox__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../finder__multiCheckbox */ "./src/shared/components/filters/finder__multiCheckbox.tsx");
+/* harmony import */ var _finder_eventSelect__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../finder__eventSelect */ "./src/shared/components/filters/finder__eventSelect.tsx");
+/* harmony import */ var _finder_checkbox__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../finder__checkbox */ "./src/shared/components/filters/finder__checkbox.tsx");
+/* harmony import */ var _finder_paramCheckbox__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../finder__paramCheckbox */ "./src/shared/components/filters/finder__paramCheckbox.tsx");
+/* harmony import */ var _finder_eventCheckbox__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../finder__eventCheckbox */ "./src/shared/components/filters/finder__eventCheckbox.tsx");
+/* harmony import */ var _finder_hiddenInput__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../finder__hiddenInput */ "./src/shared/components/filters/finder__hiddenInput.tsx");
+/* harmony import */ var _finder_tag__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../finder__tag */ "./src/shared/components/filters/finder__tag.tsx");
 /* harmony import */ var _finder_sort__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../finder__sort */ "./src/shared/components/filters/finder__sort.tsx");
-/* harmony import */ var _finder_reset__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../finder__reset */ "./src/shared/components/filters/finder__reset.tsx");
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../../util */ "./src/shared/util.tsx");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../../util */ "./src/shared/util.tsx");
 
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -2033,7 +2032,6 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
  * @author Web Development
  * @copyright City St George's, University of London 2026
  */
-
 
 
 
@@ -2092,14 +2090,6 @@ function Finder__Filters(props) {
     query: props.query,
     update: props.update
   })) : null;
-  var clearFiltersDesktop = !props.updating && Object.keys(props.query.facets).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("div", {
-    className: "v26-finder__filters__reset v26-finder__filters__reset--desktop"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_reset__WEBPACK_IMPORTED_MODULE_16__["default"], {
-    clear: props.clear,
-    resetSort: false,
-    matrixState: props.matrixState,
-    site: props.config.site || "city" // Ensure site is defined
-  })) : null;
   var submitSSR = props.matrixState ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("div", {
     className: "v26-finder__filter__submit"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("button", {
@@ -2118,7 +2108,7 @@ function Finder__Filters(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("span", {
     className: "v26-finder__filters__heading__text"
   }, "Filter ".concat((_props$config$summari = props.config.summariseAs) === null || _props$config$summari === void 0 ? void 0 : _props$config$summari.plural))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement("fieldset", null, !props.hasMounted && ((_props$query$fixedPar = props.query.fixedParameters) === null || _props$query$fixedPar === void 0 ? void 0 : _props$query$fixedPar.map(function (param) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_hiddenInput__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_hiddenInput__WEBPACK_IMPORTED_MODULE_16__["default"], {
       key: param.name,
       name: param.name,
       value: param.value
@@ -2130,7 +2120,7 @@ function Finder__Filters(props) {
     if (dependencyMet(facet, props.query.facets)) {
       switch (facet.type) {
         case 'multiCheckbox':
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_multiCheckbox__WEBPACK_IMPORTED_MODULE_18__["default"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_multiCheckbox__WEBPACK_IMPORTED_MODULE_17__["default"], {
             key: facet.meta,
             facet: facet,
             query: props.query,
@@ -2152,7 +2142,7 @@ function Finder__Filters(props) {
             matrixState: props.matrixState
           });
         case "eventCheckBox":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_eventCheckbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_eventCheckbox__WEBPACK_IMPORTED_MODULE_18__["default"], {
             key: facet.meta,
             facet: facet,
             query: props.query,
@@ -2161,7 +2151,7 @@ function Finder__Filters(props) {
             matrixState: props.matrixState
           });
         case "paramCheckBox":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_paramCheckbox__WEBPACK_IMPORTED_MODULE_20__["default"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_paramCheckbox__WEBPACK_IMPORTED_MODULE_19__["default"], {
             key: facet.meta,
             facet: facet,
             query: props.query,
@@ -2169,7 +2159,7 @@ function Finder__Filters(props) {
             pastEventsResponse: (_props$response3 = props.response) === null || _props$response3 === void 0 || (_props$response3 = _props$response3.extraSearches) === null || _props$response3 === void 0 || (_props$response3 = _props$response3.past) === null || _props$response3 === void 0 ? void 0 : _props$response3.response
           });
         case "eventSelect":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_eventSelect__WEBPACK_IMPORTED_MODULE_21__["default"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_eventSelect__WEBPACK_IMPORTED_MODULE_20__["default"], {
             key: facet.meta,
             facet: facet,
             query: props.query,
@@ -2183,7 +2173,7 @@ function Finder__Filters(props) {
             mobile: props.mobile
           });
         case "select":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_select__WEBPACK_IMPORTED_MODULE_22__["default"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_select__WEBPACK_IMPORTED_MODULE_21__["default"], {
             key: facet.meta,
             facet: facet,
             query: props.query,
@@ -2197,7 +2187,7 @@ function Finder__Filters(props) {
             mobile: props.mobile
           });
         case "checkbox":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_checkbox__WEBPACK_IMPORTED_MODULE_23__["default"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_checkbox__WEBPACK_IMPORTED_MODULE_22__["default"], {
             key: facet.meta,
             facet: facet,
             query: props.query,
@@ -2211,7 +2201,7 @@ function Finder__Filters(props) {
             mobile: props.mobile
           });
         case "tag":
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_tag__WEBPACK_IMPORTED_MODULE_24__["default"], {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_14___default().createElement(_finder_tag__WEBPACK_IMPORTED_MODULE_23__["default"], {
             key: facet.meta,
             facet: facet,
             query: props.query,
@@ -2225,7 +2215,7 @@ function Finder__Filters(props) {
             matrixState: props.matrixState
           });
         default:
-          (0,_util__WEBPACK_IMPORTED_MODULE_25__.gaEvent)("jsError", "JavaScript error", "finder__filters()", "Unknown filter type in finder__filters.js", 0, true);
+          (0,_util__WEBPACK_IMPORTED_MODULE_24__.gaEvent)("jsError", "JavaScript error", "finder__filters()", "Unknown filter type in finder__filters.js", 0, true);
       }
     } else {
       return null;
@@ -2233,15 +2223,15 @@ function Finder__Filters(props) {
   }), sort, submitSSR)));
 }
 Finder__Filters.propTypes = {
-  config: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().object),
-  query: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().object),
-  response: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().object),
-  update: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().object),
-  clear: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().func),
-  mobile: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().bool),
-  hasMounted: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().bool),
-  matrixState: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().bool),
-  updating: (prop_types__WEBPACK_IMPORTED_MODULE_26___default().bool)
+  config: (prop_types__WEBPACK_IMPORTED_MODULE_25___default().object),
+  query: (prop_types__WEBPACK_IMPORTED_MODULE_25___default().object),
+  response: (prop_types__WEBPACK_IMPORTED_MODULE_25___default().object),
+  update: (prop_types__WEBPACK_IMPORTED_MODULE_25___default().object),
+  clear: (prop_types__WEBPACK_IMPORTED_MODULE_25___default().func),
+  mobile: (prop_types__WEBPACK_IMPORTED_MODULE_25___default().bool),
+  hasMounted: (prop_types__WEBPACK_IMPORTED_MODULE_25___default().bool),
+  matrixState: (prop_types__WEBPACK_IMPORTED_MODULE_25___default().bool),
+  updating: (prop_types__WEBPACK_IMPORTED_MODULE_25___default().bool)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Finder__Filters);
 
@@ -2418,9 +2408,10 @@ function Finder__FiltersMobile(props) {
   //       ? props.summariseAs.plural
   //       : null;
 
+  var configSort = props.config.sort[0].type || '';
   var totalMatchingMessage = totalMatching ? "View results (".concat(totalMatching, ")") : "View results"; //Temporarily Left the conditional statement in incase logic of showing Close is reinstated.
 
-  var filtersCount = getFiltersCountDisplay(props.config.displaySort, props.config.sort[0].type, props.query.sortType, Object.values(props.query.facets));
+  var filtersCount = getFiltersCountDisplay(props.config.displaySort, configSort, props.query.sortType, Object.values(props.query.facets));
   var toggle = display ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("button", {
     type: "button",
     className: "wrapper--v26-finder__filters--mobile__toggle",
@@ -2429,7 +2420,7 @@ function Finder__FiltersMobile(props) {
     onClick: function onClick() {
       return setDisplay(true);
     },
-    "data-filters-applied": Object.keys(props.query.facets).length !== 0 || props.config.displaySort && props.config.sort[0].type !== props.query.sortType
+    "data-filters-applied": Object.keys(props.query.facets).length !== 0 || props.config.displaySort && configSort !== props.query.sortType
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_17___default().createElement("span", {
     className: "fa-solid fa-sliders",
     "aria-hidden": "true"
