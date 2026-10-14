@@ -7734,6 +7734,14 @@ function Finder(props) {
     clear = _useLogicWrapper.clear,
     matrixState = _useLogicWrapper.matrixState,
     summaryHeadingRef = _useLogicWrapper.summaryHeadingRef;
+  console.log("[Finder] render", {
+    site: props.config.site,
+    hasMounted: hasMounted,
+    query: query,
+    updating: updating,
+    matrixState: matrixState,
+    response: funnelbackResponse
+  });
   var sharedProps = {
     config: props.config,
     query: query,
