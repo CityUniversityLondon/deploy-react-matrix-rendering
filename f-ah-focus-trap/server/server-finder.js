@@ -61420,12 +61420,16 @@ function Finder__Query(props) {
 
   //Input for server side render
   var fallbackInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("input", _extends({}, inputSharedProps, {
+    // Distinct key so React remounts rather than switching this
+    // uncontrolled input to the controlled one after mount
+    key: "query-ssr",
     defaultValue: partialQuery,
     autoComplete: "off"
   }));
 
   //Input for client side render
   var searchInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_30___default().createElement("input", _extends({}, inputSharedProps, {
+    key: "query-client",
     ref: inputRef,
     value: partialQuery,
     onKeyDown: function onKeyDown(e) {
