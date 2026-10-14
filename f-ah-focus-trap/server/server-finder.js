@@ -58514,7 +58514,11 @@ function Finder__FiltersMobile(props) {
     var applyButton = filtersEl.querySelector(".wrapper--v26-finder__filters--mobile__apply");
     var trap = focus_trap__WEBPACK_IMPORTED_MODULE_18__.createFocusTrap(filtersEl, {
       initialFocus: applyButton || undefined,
-      clickOutsideDeactivates: true
+      clickOutsideDeactivates: true,
+      // Keep state in sync when the trap is released by clicking outside
+      onDeactivate: function onDeactivate() {
+        return setDisplay(false);
+      }
     });
     focusTrapRef.current = trap;
     return function () {
@@ -58537,6 +58541,19 @@ function Finder__FiltersMobile(props) {
       (0,_util__WEBPACK_IMPORTED_MODULE_19__.enableBodyScroll)();
     }
   }, [display]);
+
+  // Close the mobile panel when resizing up to desktop, otherwise the focus
+  // trap and body scroll lock stay active on an overlay that is no longer shown
+  (0,react__WEBPACK_IMPORTED_MODULE_17__.useEffect)(function () {
+    var mql = window.matchMedia("(min-width: 900px)"); // polaris $grid-width-medium
+    var handleChange = function handleChange(e) {
+      if (e.matches) setDisplay(false);
+    };
+    mql.addEventListener("change", handleChange);
+    return function () {
+      return mql.removeEventListener("change", handleChange);
+    };
+  }, []);
   var totalMatching = (_props$response = props.response) === null || _props$response === void 0 || (_props$response = _props$response.summary) === null || _props$response === void 0 ? void 0 : _props$response.totalMatching;
   var noFacetsSelected = !((_props$query = props.query) !== null && _props$query !== void 0 && _props$query.facets) || Object.keys(props.query.facets).length === 0;
   // const result =
