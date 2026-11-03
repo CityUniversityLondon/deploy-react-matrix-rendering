@@ -55225,14 +55225,11 @@ Finder__bayes_event.propTypes = {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.join.js */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _results_formatLabel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../results/formatLabel */ "./src/shared/components/results/formatLabel.tsx");
-
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _results_formatLabel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../results/formatLabel */ "./src/shared/components/results/formatLabel.tsx");
 
 
 /**
@@ -55252,51 +55249,45 @@ Finder__bayes_event.propTypes = {
  */
 
 function Finder__Bayes__Funding(props) {
-  var _props$details, _props$query, _props$details2, _props$details3, _props$details4, _props$details5;
-  var cardHeading = props.query.query || props.details.title ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h3", {
+  var _props$details, _props$details2, _props$details3, _props$details4, _props$details5;
+  var cardHeading = props.query.query || props.details.title ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
       className: "card__heading"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       href: props.details.liveUrl
-    }, props.query.query ? (0,_results_formatLabel__WEBPACK_IMPORTED_MODULE_2__["default"])(props.details.title, props.query.query) : props.details.title)) : null,
+    }, props.query.query ? (0,_results_formatLabel__WEBPACK_IMPORTED_MODULE_1__["default"])(props.details.title, props.query.query) : props.details.title)) : null,
     subtitle = ((_props$details = props.details) === null || _props$details === void 0 || (_props$details = _props$details.listMetadata) === null || _props$details === void 0 || (_props$details = _props$details.type) === null || _props$details === void 0 ? void 0 : _props$details[0]) || null,
-    location = props.details.listMetadata && String(props.details.listMetadata.location).toLowerCase() !== "tooting" ? props.details.listMetadata.location && ((_props$query = props.query) === null || _props$query === void 0 || (_props$query = _props$query.facets) === null || _props$query === void 0 ? void 0 : _props$query.location) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
-      className: "card__tag"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
-      className: "fas fa-fw fa-map-marker-alt icon",
-      "aria-hidden": "true"
-    }), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, "Location:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, props.details.listMetadata.location.join("|") === "Online|Online" ? "Online" : props.details.listMetadata.location.join(", "))) : null,
-    description = ((_props$details2 = props.details) === null || _props$details2 === void 0 || (_props$details2 = _props$details2.listMetadata) === null || _props$details2 === void 0 || (_props$details2 = _props$details2.c) === null || _props$details2 === void 0 ? void 0 : _props$details2[0]) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    description = ((_props$details2 = props.details) === null || _props$details2 === void 0 || (_props$details2 = _props$details2.listMetadata) === null || _props$details2 === void 0 || (_props$details2 = _props$details2.c) === null || _props$details2 === void 0 ? void 0 : _props$details2[0]) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       className: "card__description"
-    }, props.query.query ? (0,_results_formatLabel__WEBPACK_IMPORTED_MODULE_2__["default"])(props.details.listMetadata.c[0], props.query.query) : props.details.listMetadata.c[0]),
-    fundingStatus = ((_props$details3 = props.details) === null || _props$details3 === void 0 || (_props$details3 = _props$details3.listMetadata) === null || _props$details3 === void 0 || (_props$details3 = _props$details3.fStatus) === null || _props$details3 === void 0 ? void 0 : _props$details3[0]) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    }, props.query.query ? (0,_results_formatLabel__WEBPACK_IMPORTED_MODULE_1__["default"])(props.details.listMetadata.c[0], props.query.query) : props.details.listMetadata.c[0]),
+    fundingStatus = ((_props$details3 = props.details) === null || _props$details3 === void 0 || (_props$details3 = _props$details3.listMetadata) === null || _props$details3 === void 0 || (_props$details3 = _props$details3.fStatus) === null || _props$details3 === void 0 ? void 0 : _props$details3[0]) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       className: "card__tag"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
       className: "icon"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
       className: "card--bayes-funding__icon",
       "aria-hidden": "true"
-    })), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, "Funding status:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, props.details.listMetadata.fStatus[0]))),
-    region = ((_props$details4 = props.details) === null || _props$details4 === void 0 || (_props$details4 = _props$details4.listMetadata) === null || _props$details4 === void 0 ? void 0 : _props$details4.region) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    })), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Funding status:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, props.details.listMetadata.fStatus[0]))),
+    region = ((_props$details4 = props.details) === null || _props$details4 === void 0 || (_props$details4 = _props$details4.listMetadata) === null || _props$details4 === void 0 ? void 0 : _props$details4.region) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       className: "card__tag"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, "Region:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, props.details.listMetadata.region[0]))),
-    programme = ((_props$details5 = props.details) === null || _props$details5 === void 0 || (_props$details5 = _props$details5.listMetadata) === null || _props$details5 === void 0 ? void 0 : _props$details5.programme) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Region:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, props.details.listMetadata.region[0]))),
+    programme = ((_props$details5 = props.details) === null || _props$details5 === void 0 || (_props$details5 = _props$details5.listMetadata) === null || _props$details5 === void 0 ? void 0 : _props$details5.programme) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
       className: "card__tag"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, "Programme:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, props.details.listMetadata.programme[0])));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("li", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Programme:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, props.details.listMetadata.programme[0])));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
     className: "card card--bayes-funding"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "wrapper--card__label__details"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card__details__text"
-  }, cardHeading, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+  }, cardHeading, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "card__type"
-  }, props.query.query && subtitle ? (0,_results_formatLabel__WEBPACK_IMPORTED_MODULE_2__["default"])(subtitle, props.query.query) : subtitle), description, programme || region ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+  }, props.query.query && subtitle ? (0,_results_formatLabel__WEBPACK_IMPORTED_MODULE_1__["default"])(subtitle, props.query.query) : subtitle), description, programme || region ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card--bayes-funding__programme-region"
-  }, programme, region) : null, fundingStatus, location)));
+  }, programme, region) : null, fundingStatus)));
 }
 Finder__Bayes__Funding.propTypes = {
-  details: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object),
-  query: (prop_types__WEBPACK_IMPORTED_MODULE_3___default().object)
+  details: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().object),
+  query: (prop_types__WEBPACK_IMPORTED_MODULE_2___default().object)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Finder__Bayes__Funding);
 
