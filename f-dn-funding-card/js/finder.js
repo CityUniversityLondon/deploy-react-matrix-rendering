@@ -170,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * @module patterns/finder/components/cards/finder__results__course
+ * @module patterns/finder/components/cards/bayes/finder__bayes_funding
  * @author Web Development
  * @copyright City St George's, University of London 2026
  */
@@ -179,7 +179,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * Render a Funnelback result as a course card.
+ * Render a Funnelback result as a Bayes funding card.
  *
  * @param {object} props React props.
  * @return {object} - React component.
