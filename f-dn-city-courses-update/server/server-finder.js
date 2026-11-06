@@ -54812,364 +54812,6 @@ function extend() {
 
 /***/ }),
 
-/***/ "./node_modules/zenscroll/zenscroll.js":
-/*!*********************************************!*\
-  !*** ./node_modules/zenscroll/zenscroll.js ***!
-  \*********************************************/
-/***/ (function(module, exports) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
- * Zenscroll 4.0.2
- * https://github.com/zengabor/zenscroll/
- *
- * Copyright 2015–2018 Gabor Lenard
- *
- * This is free and unencumbered software released into the public domain.
- * 
- * Anyone is free to copy, modify, publish, use, compile, sell, or
- * distribute this software, either in source code form or as a compiled
- * binary, for any purpose, commercial or non-commercial, and by any
- * means.
- * 
- * In jurisdictions that recognize copyright laws, the author or authors
- * of this software dedicate any and all copyright interest in the
- * software to the public domain. We make this dedication for the benefit
- * of the public at large and to the detriment of our heirs and
- * successors. We intend this dedication to be an overt act of
- * relinquishment in perpetuity of all present and future rights to this
- * software under copyright law.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- * IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- * 
- * For more information, please refer to <http://unlicense.org>
- * 
- */
-
-/*jshint devel:true, asi:true */
-
-/*global define, module */
-
-
-(function (root, factory) {
-	if (true) {
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory()),
-		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
-	} else {}
-}(this, function () {
-	"use strict"
-
-
-	// Detect if the browser already supports native smooth scrolling (e.g., Firefox 36+ and Chrome 49+) and it is enabled:
-	var isNativeSmoothScrollEnabledOn = function (elem) {
-		return elem && "getComputedStyle" in window &&
-			window.getComputedStyle(elem)["scroll-behavior"] === "smooth"
-	}
-
-
-	// Exit if it’s not a browser environment:
-	if (typeof window === "undefined" || !("document" in window)) {
-		return {}
-	}
-
-
-	var makeScroller = function (container, defaultDuration, edgeOffset) {
-
-		// Use defaults if not provided
-		defaultDuration = defaultDuration || 999 //ms
-		if (!edgeOffset && edgeOffset !== 0) {
-			// When scrolling, this amount of distance is kept from the edges of the container:
-			edgeOffset = 9 //px
-		}
-
-		// Handling the life-cycle of the scroller
-		var scrollTimeoutId
-		var setScrollTimeoutId = function (newValue) {
-			scrollTimeoutId = newValue
-		}
-
-		/**
-		 * Stop the current smooth scroll operation immediately
-		 */
-		var stopScroll = function () {
-			clearTimeout(scrollTimeoutId)
-			setScrollTimeoutId(0)
-		}
-
-		var getTopWithEdgeOffset = function (elem) {
-			return Math.max(0, container.getTopOf(elem) - edgeOffset)
-		}
-
-		/**
-		 * Scrolls to a specific vertical position in the document.
-		 *
-		 * @param {targetY} The vertical position within the document.
-		 * @param {duration} Optionally the duration of the scroll operation.
-		 *        If not provided the default duration is used.
-		 * @param {onDone} An optional callback function to be invoked once the scroll finished.
-		 */
-		var scrollToY = function (targetY, duration, onDone) {
-			stopScroll()
-			if (duration === 0 || (duration && duration < 0) || isNativeSmoothScrollEnabledOn(container.body)) {
-				container.toY(targetY)
-				if (onDone) {
-					onDone()
-				}
-			} else {
-				var startY = container.getY()
-				var distance = Math.max(0, targetY) - startY
-				var startTime = new Date().getTime()
-				duration = duration || Math.min(Math.abs(distance), defaultDuration);
-				(function loopScroll() {
-					setScrollTimeoutId(setTimeout(function () {
-						// Calculate percentage:
-						var p = Math.min(1, (new Date().getTime() - startTime) / duration)
-						// Calculate the absolute vertical position:
-						var y = Math.max(0, Math.floor(startY + distance*(p < 0.5 ? 2*p*p : p*(4 - p*2)-1)))
-						container.toY(y)
-						if (p < 1 && (container.getHeight() + y) < container.body.scrollHeight) {
-							loopScroll()
-						} else {
-							setTimeout(stopScroll, 99) // with cooldown time
-							if (onDone) {
-								onDone()
-							}
-						}
-					}, 9))
-				})()
-			}
-		}
-
-		/**
-		 * Scrolls to the top of a specific element.
-		 *
-		 * @param {elem} The element to scroll to.
-		 * @param {duration} Optionally the duration of the scroll operation.
-		 * @param {onDone} An optional callback function to be invoked once the scroll finished.
-		 */
-		var scrollToElem = function (elem, duration, onDone) {
-			scrollToY(getTopWithEdgeOffset(elem), duration, onDone)
-		}
-
-		/**
-		 * Scrolls an element into view if necessary.
-		 *
-		 * @param {elem} The element.
-		 * @param {duration} Optionally the duration of the scroll operation.
-		 * @param {onDone} An optional callback function to be invoked once the scroll finished.
-		 */
-		var scrollIntoView = function (elem, duration, onDone) {
-			var elemHeight = elem.getBoundingClientRect().height
-			var elemBottom = container.getTopOf(elem) + elemHeight
-			var containerHeight = container.getHeight()
-			var y = container.getY()
-			var containerBottom = y + containerHeight
-			if (getTopWithEdgeOffset(elem) < y || (elemHeight + edgeOffset) > containerHeight) {
-				// Element is clipped at top or is higher than screen.
-				scrollToElem(elem, duration, onDone)
-			} else if ((elemBottom + edgeOffset) > containerBottom) {
-				// Element is clipped at the bottom.
-				scrollToY(elemBottom - containerHeight + edgeOffset, duration, onDone)
-			} else if (onDone) {
-				onDone()
-			}
-		}
-
-		/**
-		 * Scrolls to the center of an element.
-		 *
-		 * @param {elem} The element.
-		 * @param {duration} Optionally the duration of the scroll operation.
-		 * @param {offset} Optionally the offset of the top of the element from the center of the screen.
-		 *        A value of 0 is ignored.
-		 * @param {onDone} An optional callback function to be invoked once the scroll finished.
-		 */
-		var scrollToCenterOf = function (elem, duration, offset, onDone) {
-			scrollToY(Math.max(0, container.getTopOf(elem) - container.getHeight()/2 + (offset || elem.getBoundingClientRect().height/2)), duration, onDone)
-		}
-
-		/**
-		 * Changes default settings for this scroller.
-		 *
-		 * @param {newDefaultDuration} Optionally a new value for default duration, used for each scroll method by default.
-		 *        Ignored if null or undefined.
-		 * @param {newEdgeOffset} Optionally a new value for the edge offset, used by each scroll method by default. Ignored if null or undefined.
-		 * @returns An object with the current values.
-		 */
-		var setup = function (newDefaultDuration, newEdgeOffset) {
-			if (newDefaultDuration === 0 || newDefaultDuration) {
-				defaultDuration = newDefaultDuration
-			}
-			if (newEdgeOffset === 0 || newEdgeOffset) {
-				edgeOffset = newEdgeOffset
-			}
-			return {
-				defaultDuration: defaultDuration,
-				edgeOffset: edgeOffset
-			}
-		}
-
-		return {
-			setup: setup,
-			to: scrollToElem,
-			toY: scrollToY,
-			intoView: scrollIntoView,
-			center: scrollToCenterOf,
-			stop: stopScroll,
-			moving: function () { return !!scrollTimeoutId },
-			getY: container.getY,
-			getTopOf: container.getTopOf
-		}
-
-	}
-
-
-	var docElem = document.documentElement
-	var getDocY = function () { return window.scrollY || docElem.scrollTop }
-
-	// Create a scroller for the document:
-	var zenscroll = makeScroller({
-		body: document.scrollingElement || document.body,
-		toY: function (y) { window.scrollTo(0, y) },
-		getY: getDocY,
-		getHeight: function () { return window.innerHeight || docElem.clientHeight },
-		getTopOf: function (elem) { return elem.getBoundingClientRect().top + getDocY() - docElem.offsetTop }
-	})
-
-
-	/**
-	 * Creates a scroller from the provided container element (e.g., a DIV)
-	 *
-	 * @param {scrollContainer} The vertical position within the document.
-	 * @param {defaultDuration} Optionally a value for default duration, used for each scroll method by default.
-	 *        Ignored if 0 or null or undefined.
-	 * @param {edgeOffset} Optionally a value for the edge offset, used by each scroll method by default. 
-	 *        Ignored if null or undefined.
-	 * @returns A scroller object, similar to `zenscroll` but controlling the provided element.
-	 */
-	zenscroll.createScroller = function (scrollContainer, defaultDuration, edgeOffset) {
-		return makeScroller({
-			body: scrollContainer,
-			toY: function (y) { scrollContainer.scrollTop = y },
-			getY: function () { return scrollContainer.scrollTop },
-			getHeight: function () { return Math.min(scrollContainer.clientHeight, window.innerHeight || docElem.clientHeight) },
-			getTopOf: function (elem) { return elem.offsetTop }
-		}, defaultDuration, edgeOffset)
-	}
-
-
-	// Automatic link-smoothing on achors
-	// Exclude IE8- or when native is enabled or Zenscroll auto- is disabled
-	if ("addEventListener" in window && !window.noZensmooth && !isNativeSmoothScrollEnabledOn(document.body)) {
-
-		var isHistorySupported = "history" in window && "pushState" in history
-		var isScrollRestorationSupported = isHistorySupported && "scrollRestoration" in history
-
-		// On first load & refresh make sure the browser restores the position first
-		if (isScrollRestorationSupported) {
-			history.scrollRestoration = "auto"
-		}
-
-		window.addEventListener("load", function () {
-
-			if (isScrollRestorationSupported) {
-				// Set it to manual
-				setTimeout(function () { history.scrollRestoration = "manual" }, 9)
-				window.addEventListener("popstate", function (event) {
-					if (event.state && "zenscrollY" in event.state) {
-						zenscroll.toY(event.state.zenscrollY)
-					}
-				}, false)
-			}
-
-			// Add edge offset on first load if necessary
-			// This may not work on IE (or older computer?) as it requires more timeout, around 100 ms
-			if (window.location.hash) {
-				setTimeout(function () {
-					// Adjustment is only needed if there is an edge offset:
-					var edgeOffset = zenscroll.setup().edgeOffset
-					if (edgeOffset) {
-						var targetElem = document.getElementById(window.location.href.split("#")[1])
-						if (targetElem) {
-							var targetY = Math.max(0, zenscroll.getTopOf(targetElem) - edgeOffset)
-							var diff = zenscroll.getY() - targetY
-							// Only do the adjustment if the browser is very close to the element:
-							if (0 <= diff && diff < 9 ) {
-								window.scrollTo(0, targetY)
-							}
-						}
-					}
-				}, 9)
-			}
-
-		}, false)
-
-		// Handling clicks on anchors
-		var RE_noZensmooth = new RegExp("(^|\\s)noZensmooth(\\s|$)")
-		window.addEventListener("click", function (event) {
-			var anchor = event.target
-			while (anchor && anchor.tagName !== "A") {
-				anchor = anchor.parentNode
-			}
-			// Let the browser handle the click if it wasn't with the primary button, or with some modifier keys:
-			if (!anchor || event.which !== 1 || event.shiftKey || event.metaKey || event.ctrlKey || event.altKey) {
-				return
-			}
-			// Save the current scrolling position so it can be used for scroll restoration:
-			if (isScrollRestorationSupported) {
-				var historyState = history.state && typeof history.state === "object" ? history.state : {}
-				historyState.zenscrollY = zenscroll.getY()
-				try {
-					history.replaceState(historyState, "")
-				} catch (e) {
-					// Avoid the Chrome Security exception on file protocol, e.g., file://index.html
-				}
-			}
-			// Find the referenced ID:
-			var href = anchor.getAttribute("href") || ""
-			if (href.indexOf("#") === 0 && !RE_noZensmooth.test(anchor.className)) {
-				var targetY = 0
-				var targetElem = document.getElementById(href.substring(1))
-				if (href !== "#") {
-					if (!targetElem) {
-						// Let the browser handle the click if the target ID is not found.
-						return
-					}
-					targetY = zenscroll.getTopOf(targetElem)
-				}
-				event.preventDefault()
-				// By default trigger the browser's `hashchange` event...
-				var onDone = function () { window.location = href }
-				// ...unless there is an edge offset specified
-				var edgeOffset = zenscroll.setup().edgeOffset
-				if (edgeOffset) {
-					targetY = Math.max(0, targetY - edgeOffset)
-					if (isHistorySupported) {
-						onDone = function () { history.pushState({}, "", href) }
-					}
-				}
-				zenscroll.toY(targetY, null, onDone)
-			}
-		}, false)
-
-	}
-
-
-	return zenscroll
-
-
-}));
-
-
-/***/ }),
-
 /***/ "./src/server/matrix.tsx":
 /*!*******************************!*\
   !*** ./src/server/matrix.tsx ***!
@@ -58947,8 +58589,9 @@ Finder__FiltersMobile.propTypes = {
 /* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_18__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _finder_filterLabel_count__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./finder__filterLabel__count */ "./src/shared/components/filters/finder__filterLabel__count.tsx");
 
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -58981,6 +58624,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
  * @author Web Development
  * @copyright City St George's, University of London 2026
  */
+
 
 
 
@@ -59026,18 +58670,20 @@ function Finder__Checkbox(props) {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_19___default().createElement("label", {
       className: "v26-finder_filters__label v26-finder_filters__label--always",
       htmlFor: "meta_".concat(props.facet.meta, "_sand--").concat(randomNumber)
-    }, props.facet.name, !toggleChecked && responseFacetValue && " (" + responseFacetValue[0].count + ")"));
+    }, props.facet.name, !toggleChecked && responseFacetValue && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_19___default().createElement(_finder_filterLabel_count__WEBPACK_IMPORTED_MODULE_20__["default"], {
+      count: responseFacetValue[0].count
+    })));
   } else {
     return null;
   }
 }
 Finder__Checkbox.propTypes = {
-  facet: (prop_types__WEBPACK_IMPORTED_MODULE_20___default().object),
-  query: (prop_types__WEBPACK_IMPORTED_MODULE_20___default().object),
-  responseFacet: prop_types__WEBPACK_IMPORTED_MODULE_20___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_20___default().object)),
-  update: (prop_types__WEBPACK_IMPORTED_MODULE_20___default().object),
-  dependencies: prop_types__WEBPACK_IMPORTED_MODULE_20___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_20___default().object)),
-  mobile: (prop_types__WEBPACK_IMPORTED_MODULE_20___default().bool)
+  facet: (prop_types__WEBPACK_IMPORTED_MODULE_21___default().object),
+  query: (prop_types__WEBPACK_IMPORTED_MODULE_21___default().object),
+  responseFacet: prop_types__WEBPACK_IMPORTED_MODULE_21___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_21___default().object)),
+  update: (prop_types__WEBPACK_IMPORTED_MODULE_21___default().object),
+  dependencies: prop_types__WEBPACK_IMPORTED_MODULE_21___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_21___default().object)),
+  mobile: (prop_types__WEBPACK_IMPORTED_MODULE_21___default().bool)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Finder__Checkbox);
 
@@ -59296,9 +58942,10 @@ Finder__ClearFilterTag.propTypes = {
 /* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_24__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_27___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_27__);
-/* harmony import */ var _tools_finder_accordion__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../tools/finder__accordion */ "./src/shared/components/tools/finder__accordion.tsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_28__);
+/* harmony import */ var _tools_finder_accordion__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../tools/finder__accordion */ "./src/shared/components/tools/finder__accordion.tsx");
+/* harmony import */ var _finder_filterLabel_count__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./finder__filterLabel__count */ "./src/shared/components/filters/finder__filterLabel__count.tsx");
 
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -59337,6 +58984,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
  * @author Web Development
  * @copyright City St George's, University of London 2026
  */
+
 
 
 
@@ -59392,7 +59040,9 @@ function Finder__DrillDown(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement("div", {
       className: "v26-finder__filter v26-finder__drillDown__level",
       key: "".concat(facet.meta, "-").concat(index)
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement("fieldset", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement("legend", null, index === 0 ? facet.name : "".concat(facet.name).concat(values.length > 1 && 's' || '', " in ").concat(props.query.facets[facets[index - 1].meta])), values.map(function (_ref) {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement("fieldset", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement("legend", {
+      className: index === 0 ? "sr-only" : undefined
+    }, index === 0 ? facet.name : "".concat(facet.name).concat(values.length > 1 && 's' || '', " in ").concat(props.query.facets[facets[index - 1].meta])), values.map(function (_ref) {
       var data = _ref.data,
         label = _ref.label,
         responseValue = _ref.responseValue;
@@ -59415,25 +59065,27 @@ function Finder__DrillDown(props) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement("label", {
         className: "v26-finder_filters__label v26-finder_filters__label--always",
         htmlFor: inputId
-      }, label, responseValue && responseValue.count > 0 ? " (".concat(responseValue.count, ")") : ''));
+      }, label, responseValue && responseValue.count > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement(_finder_filterLabel_count__WEBPACK_IMPORTED_MODULE_26__["default"], {
+        count: responseValue.count
+      }) : ''));
     })));
   });
   var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement("div", {
     className: "v26-finder__drillDown"
   }, checkboxes);
-  return props.facet.accordion && !props.matrixState ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement(_tools_finder_accordion__WEBPACK_IMPORTED_MODULE_26__["default"], {
+  return props.facet.accordion && !props.matrixState ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_25___default().createElement(_tools_finder_accordion__WEBPACK_IMPORTED_MODULE_27__["default"], {
     title: props.facet.name,
     matrixState: false,
     totalChecked: selectedCount
   }, content) : content;
 }
 Finder__DrillDown.propTypes = {
-  facet: (prop_types__WEBPACK_IMPORTED_MODULE_27___default().object).isRequired,
-  query: (prop_types__WEBPACK_IMPORTED_MODULE_27___default().object).isRequired,
-  response: (prop_types__WEBPACK_IMPORTED_MODULE_27___default().object).isRequired,
-  update: (prop_types__WEBPACK_IMPORTED_MODULE_27___default().object).isRequired,
-  mobile: (prop_types__WEBPACK_IMPORTED_MODULE_27___default().bool),
-  matrixState: (prop_types__WEBPACK_IMPORTED_MODULE_27___default().bool)
+  facet: (prop_types__WEBPACK_IMPORTED_MODULE_28___default().object).isRequired,
+  query: (prop_types__WEBPACK_IMPORTED_MODULE_28___default().object).isRequired,
+  response: (prop_types__WEBPACK_IMPORTED_MODULE_28___default().object).isRequired,
+  update: (prop_types__WEBPACK_IMPORTED_MODULE_28___default().object).isRequired,
+  mobile: (prop_types__WEBPACK_IMPORTED_MODULE_28___default().bool),
+  matrixState: (prop_types__WEBPACK_IMPORTED_MODULE_28___default().bool)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Finder__DrillDown);
 
@@ -59850,6 +59502,36 @@ Finder__Select.propTypes = {
   mobile: (prop_types__WEBPACK_IMPORTED_MODULE_29___default().bool)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Finder__Select);
+
+/***/ }),
+
+/***/ "./src/shared/components/filters/finder__filterLabel__count.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/shared/components/filters/finder__filterLabel__count.tsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+
+function FinderFilterLabelCount(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "v26-finder_filters__label__count"
+  }, ' ', "(", props.count, ")");
+}
+FinderFilterLabelCount.propTypes = {
+  count: (prop_types__WEBPACK_IMPORTED_MODULE_1___default().string)
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FinderFilterLabelCount);
 
 /***/ }),
 
@@ -60919,9 +60601,10 @@ Finder__paramCheckbox.propTypes = {
 /* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_28__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_29___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_29__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_31___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_31__);
-/* harmony import */ var _tools_finder_accordion__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../tools/finder__accordion */ "./src/shared/components/tools/finder__accordion.tsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_32___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_32__);
+/* harmony import */ var _tools_finder_accordion__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../tools/finder__accordion */ "./src/shared/components/tools/finder__accordion.tsx");
+/* harmony import */ var _finder_filterLabel_count__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./finder__filterLabel__count */ "./src/shared/components/filters/finder__filterLabel__count.tsx");
 
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -60970,6 +60653,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
  * @author Web Development
  * @copyright City St George's, University of London 2026
  */
+
 
 
 
@@ -61032,7 +60716,9 @@ function Finder__Radio(props) {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_29___default().createElement("label", {
       className: "v26-finder_filters__label",
       htmlFor: id
-    }, value.label, count !== undefined && count > 0 ? " (".concat(count, ")") : ""));
+    }, value.label, count !== undefined && count > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_29___default().createElement(_finder_filterLabel_count__WEBPACK_IMPORTED_MODULE_30__["default"], {
+      count: count
+    }) : ""));
   });
   var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_29___default().createElement("fieldset", {
     className: "v26-finder__filter v26-finder__radio"
@@ -61053,19 +60739,19 @@ function Finder__Radio(props) {
     className: "v26-finder_filters__label",
     htmlFor: "meta_".concat(props.facet.meta, "_sand--").concat(props.mobile ? "mobile" : "desktop", "--all")
   }, props.facet.noSelection)), radios);
-  return props.facet.accordion && !props.matrixState ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_29___default().createElement(_tools_finder_accordion__WEBPACK_IMPORTED_MODULE_30__["default"], {
+  return props.facet.accordion && !props.matrixState ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_29___default().createElement(_tools_finder_accordion__WEBPACK_IMPORTED_MODULE_31__["default"], {
     title: props.facet.name,
     matrixState: false,
     totalChecked: checkTotal
   }, content) : content;
 }
 Finder__Radio.propTypes = {
-  facet: (prop_types__WEBPACK_IMPORTED_MODULE_31___default().object).isRequired,
-  query: (prop_types__WEBPACK_IMPORTED_MODULE_31___default().object).isRequired,
-  responseFacet: prop_types__WEBPACK_IMPORTED_MODULE_31___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_31___default().object)).isRequired,
-  update: (prop_types__WEBPACK_IMPORTED_MODULE_31___default().object).isRequired,
-  dependencies: prop_types__WEBPACK_IMPORTED_MODULE_31___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_31___default().object)),
-  mobile: (prop_types__WEBPACK_IMPORTED_MODULE_31___default().bool)
+  facet: (prop_types__WEBPACK_IMPORTED_MODULE_32___default().object).isRequired,
+  query: (prop_types__WEBPACK_IMPORTED_MODULE_32___default().object).isRequired,
+  responseFacet: prop_types__WEBPACK_IMPORTED_MODULE_32___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_32___default().object)).isRequired,
+  update: (prop_types__WEBPACK_IMPORTED_MODULE_32___default().object).isRequired,
+  dependencies: prop_types__WEBPACK_IMPORTED_MODULE_32___default().arrayOf((prop_types__WEBPACK_IMPORTED_MODULE_32___default().object)),
+  mobile: (prop_types__WEBPACK_IMPORTED_MODULE_32___default().bool)
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Finder__Radio);
 
@@ -63301,7 +62987,7 @@ function Finder__Accordion(props) {
       onClick: toggleAccordion
     }, props.title, " ", props.totalChecked > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("span", {
       className: "v26-finder__accordion__count"
-    }, "(", props.totalChecked, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("span", {
+    }, props.totalChecked), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("span", {
       className: "fa-solid fa-chevron-down finder__accordion__toggle__icon",
       "aria-hidden": "true"
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_13___default().createElement("div", {
@@ -63524,7 +63210,7 @@ function Finder(props) {
 
   // Use server-provided query params during SSR, then switch to the browser URL after hydration.
   var initialQuery = hasMounted ? new URLSearchParams(window.location.search) : props.initialQuery || {};
-  var _useLogicWrapper = (0,_logic_logic__WEBPACK_IMPORTED_MODULE_10__["default"])(props.config, (_props$initialResults = props.initialResults) !== null && _props$initialResults !== void 0 ? _props$initialResults : intialResults, initialQuery, props.element),
+  var _useLogicWrapper = (0,_logic_logic__WEBPACK_IMPORTED_MODULE_10__["default"])(props.config, (_props$initialResults = props.initialResults) !== null && _props$initialResults !== void 0 ? _props$initialResults : intialResults, initialQuery),
     query = _useLogicWrapper.query,
     funnelbackResponse = _useLogicWrapper.funnelbackResponse,
     updating = _useLogicWrapper.updating,
@@ -64242,14 +63928,12 @@ function hyperLink(query, facet, pageNumber, numberRank, facetValueInArray, conf
 /* harmony import */ var core_js_modules_web_url_search_params_js__WEBPACK_IMPORTED_MODULE_29___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_url_search_params_js__WEBPACK_IMPORTED_MODULE_29__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_30___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_30__);
-/* harmony import */ var _has_mounted__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./has-mounted */ "./src/shared/logic/has-mounted.ts");
-/* harmony import */ var _replace_history__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./replace-history */ "./src/shared/logic/replace-history.ts");
-/* harmony import */ var _url_params__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./url-params */ "./src/shared/logic/url-params.ts");
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ../util */ "./src/shared/util.tsx");
-/* harmony import */ var _funnelback__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./funnelback */ "./src/shared/logic/funnelback.ts");
-/* harmony import */ var zenscroll__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! zenscroll */ "./node_modules/zenscroll/zenscroll.js");
-/* harmony import */ var zenscroll__WEBPACK_IMPORTED_MODULE_31___default = /*#__PURE__*/__webpack_require__.n(zenscroll__WEBPACK_IMPORTED_MODULE_31__);
-/* harmony import */ var _types_facet__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ../types/facet */ "./src/shared/types/facet.ts");
+/* harmony import */ var _has_mounted__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./has-mounted */ "./src/shared/logic/has-mounted.ts");
+/* harmony import */ var _replace_history__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./replace-history */ "./src/shared/logic/replace-history.ts");
+/* harmony import */ var _url_params__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./url-params */ "./src/shared/logic/url-params.ts");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../util */ "./src/shared/util.tsx");
+/* harmony import */ var _funnelback__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./funnelback */ "./src/shared/logic/funnelback.ts");
+/* harmony import */ var _types_facet__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../types/facet */ "./src/shared/types/facet.ts");
 
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -64302,18 +63986,15 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-
-function useLogicWrapper(config, results, matrixQuery, element) {
+function useLogicWrapper(config, results, matrixQuery) {
   var summaryHeadingRef = (0,react__WEBPACK_IMPORTED_MODULE_30__.useRef)(null);
-  var hasMounted = (0,_has_mounted__WEBPACK_IMPORTED_MODULE_32__["default"])();
-  var screenOffsetRatio = 10;
-  var scrollDuration = typeof window !== 'undefined' && !(0,_util__WEBPACK_IMPORTED_MODULE_33__.reduceMotion)() ? 1000 : 0;
+  var hasMounted = (0,_has_mounted__WEBPACK_IMPORTED_MODULE_31__["default"])();
   var initialResults = results || {};
-  var facetLabels = (0,_types_facet__WEBPACK_IMPORTED_MODULE_34__.flattenFacetDetails)(config.facetLabels || []);
+  var facetLabels = (0,_types_facet__WEBPACK_IMPORTED_MODULE_32__.flattenFacetDetails)(config.facetLabels || []);
   var nonFBParams = facetLabels.filter(function (p) {
     return p.nonFBParam;
   });
-  var initializeParams = facetLabels.length > 0 ? (0,_url_params__WEBPACK_IMPORTED_MODULE_35__.getFacetParams)(facetLabels, matrixQuery) : {};
+  var initializeParams = facetLabels.length > 0 ? (0,_url_params__WEBPACK_IMPORTED_MODULE_33__.getFacetParams)(facetLabels, matrixQuery) : {};
   var site = config.site || undefined;
   var profile = config.profile || '_default';
 
@@ -64346,7 +64027,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
     collection: config.collection,
     profile: profile,
     facets: initializeParams,
-    parameters: nonFBParams && nonFBParams.length > 0 && matrixQuery ? (0,_url_params__WEBPACK_IMPORTED_MODULE_35__.getNonFBParams)(facetLabels, matrixQuery) : {},
+    parameters: nonFBParams && nonFBParams.length > 0 && matrixQuery ? (0,_url_params__WEBPACK_IMPORTED_MODULE_33__.getNonFBParams)(facetLabels, matrixQuery) : {},
     fixedFacets: config.fixedFacets,
     fixedParameters: config.fixParameters ? config.fixParameters : [],
     interacted: false,
@@ -64448,8 +64129,8 @@ function useLogicWrapper(config, results, matrixQuery, element) {
     var matrixState = !hasMounted && matrixQuery ? true : false;
     var baseQuery = {
       collection: config.collection,
-      facets: facetLabels.length > 0 ? (0,_url_params__WEBPACK_IMPORTED_MODULE_35__.getFacetParams)(facetLabels, defaultParams) : {},
-      parameters: config.facetLabels && nonFBParams && nonFBParams.length > 0 ? (0,_url_params__WEBPACK_IMPORTED_MODULE_35__.getNonFBParams)(facetLabels, defaultParams) : {},
+      facets: facetLabels.length > 0 ? (0,_url_params__WEBPACK_IMPORTED_MODULE_33__.getFacetParams)(facetLabels, defaultParams) : {},
+      parameters: config.facetLabels && nonFBParams && nonFBParams.length > 0 ? (0,_url_params__WEBPACK_IMPORTED_MODULE_33__.getNonFBParams)(facetLabels, defaultParams) : {},
       fixedFacets: config.fixedFacets,
       fixedParameters: config.fixParameters || [],
       interacted: false,
@@ -64477,16 +64158,10 @@ function useLogicWrapper(config, results, matrixQuery, element) {
   // Step 4: Update response when `update` flips
   (0,react__WEBPACK_IMPORTED_MODULE_30__.useEffect)(function () {
     if (!query) return;
-    (0,_replace_history__WEBPACK_IMPORTED_MODULE_36__["default"])(query.query, query.startRank, query.facets, query.parameters || {}, query.sortType, facetLabels, config.sort[0].type, hasMounted);
+    (0,_replace_history__WEBPACK_IMPORTED_MODULE_34__["default"])(query.query, query.startRank, query.facets, query.parameters || {}, query.sortType, facetLabels, config.sort[0].type, hasMounted);
     setUpdating(true);
-    if (query.interacted && element) {
-      var resultsEl = element.querySelector('.finder__results');
-      if (resultsEl instanceof HTMLElement) {
-        zenscroll__WEBPACK_IMPORTED_MODULE_31___default().center(resultsEl, scrollDuration, -window.innerHeight / screenOffsetRatio);
-      }
-    }
     call.cancel();
-    var _find = (0,_funnelback__WEBPACK_IMPORTED_MODULE_37__.find)(query.collection, query.fixedFacets, query.fixedParameters, query.query, query.sortType, query.startRank, query.numRanks, query.facets, query.parameters, site, facetLabels, profile),
+    var _find = (0,_funnelback__WEBPACK_IMPORTED_MODULE_35__.find)(query.collection, query.fixedFacets, query.fixedParameters, query.query, query.sortType, query.startRank, query.numRanks, query.facets, query.parameters, site, facetLabels, profile),
       _find2 = _slicedToArray(_find, 2),
       request = _find2[0],
       abortController = _find2[1];
@@ -64499,7 +64174,7 @@ function useLogicWrapper(config, results, matrixQuery, element) {
       setResponse(data); // ✅ Freeze before setting
       setUpdating(false);
     })["catch"](function (error) {
-      if ((0,_util__WEBPACK_IMPORTED_MODULE_33__.isRequestCanceled)(error)) {
+      if ((0,_util__WEBPACK_IMPORTED_MODULE_36__.isRequestCanceled)(error)) {
         return;
       }
       setResponse(initialResults);
@@ -64509,14 +64184,6 @@ function useLogicWrapper(config, results, matrixQuery, element) {
       abortController.abort();
     };
   }, [update, query]);
-  (0,react__WEBPACK_IMPORTED_MODULE_30__.useEffect)(function () {
-    if (!query.interacted || updating) return;
-    if (!summaryHeadingRef.current) return;
-    summaryHeadingRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center'
-    });
-  }, [funnelbackResponse, updating, query.interacted]);
   var updater = {
     query: function query(newQuery) {
       return setQuery(newQuery);
@@ -65080,11 +64747,10 @@ function flattenFacetDetails(facets, drillDownFacetName) {
 /* harmony export */   formatTime: () => (/* binding */ formatTime),
 /* harmony export */   gaEvent: () => (/* binding */ gaEvent),
 /* harmony export */   isRequestCanceled: () => (/* binding */ isRequestCanceled),
-/* harmony export */   reduceMotion: () => (/* binding */ reduceMotion),
 /* harmony export */   toBool: () => (/* binding */ toBool),
 /* harmony export */   uppercaseFirstLetterLowercaseRest: () => (/* binding */ uppercaseFirstLetterLowercaseRest)
 /* harmony export */ });
-/* unused harmony exports removeClass, isVisible, verticallyInWindow, parametersToObject, objectToParameters, appendAll, numberFromString, isMobile, toArray, detectIE, checkIntersectionObserver, arraySlicer, getVerticalScrollbarWidth, formatFBResponse */
+/* unused harmony exports removeClass, reduceMotion, isVisible, verticallyInWindow, parametersToObject, objectToParameters, appendAll, numberFromString, isMobile, toArray, detectIE, checkIntersectionObserver, arraySlicer, getVerticalScrollbarWidth, formatFBResponse */
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
 /* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
