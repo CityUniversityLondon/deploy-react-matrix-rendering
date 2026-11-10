@@ -4252,7 +4252,6 @@ function Finder__DrillDown(props) {
     var currentValue = Array.isArray(rawValue) ? (_rawValue$2 = rawValue[0]) !== null && _rawValue$2 !== void 0 ? _rawValue$2 : '' : String(rawValue !== null && rawValue !== void 0 ? rawValue : '');
     var parentValue = props.query.facets[facets[0].meta];
     var autoSelectKey = JSON.stringify([facets[0].meta, parentValue, facets[1].meta, secondLevelAutoSelect]);
-    console.log('autoSelectKey', autoSelectKey, attemptedAutoSelects.current.has(autoSelectKey), currentValue.toLowerCase().trim(), secondLevelAutoSelect);
     if (attemptedAutoSelects.current.has(autoSelectKey)) return;
     attemptedAutoSelects.current.add(autoSelectKey);
     if (currentValue.toLowerCase().trim() !== secondLevelAutoSelect) {
