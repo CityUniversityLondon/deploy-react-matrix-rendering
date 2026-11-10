@@ -4232,7 +4232,10 @@ function Finder__DrillDown(props) {
         value: normalizedValue,
         checked: checked,
         onChange: function onChange() {
-          return setFacet(index, checked ? '' : normalizedValue);
+          if (index === 0 && checked) {
+            attemptedAutoSelects.current.clear();
+          }
+          setFacet(index, checked ? '' : normalizedValue);
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_28___default().createElement("label", {
         className: "v26-finder_filters__label v26-finder_filters__label--always",
@@ -4249,6 +4252,7 @@ function Finder__DrillDown(props) {
     var currentValue = Array.isArray(rawValue) ? (_rawValue$2 = rawValue[0]) !== null && _rawValue$2 !== void 0 ? _rawValue$2 : '' : String(rawValue !== null && rawValue !== void 0 ? rawValue : '');
     var parentValue = props.query.facets[facets[0].meta];
     var autoSelectKey = JSON.stringify([facets[0].meta, parentValue, facets[1].meta, secondLevelAutoSelect]);
+    console.log('autoSelectKey', autoSelectKey, attemptedAutoSelects.current.has(autoSelectKey), currentValue.toLowerCase().trim(), secondLevelAutoSelect);
     if (attemptedAutoSelects.current.has(autoSelectKey)) return;
     attemptedAutoSelects.current.add(autoSelectKey);
     if (currentValue.toLowerCase().trim() !== secondLevelAutoSelect) {
@@ -5434,7 +5438,7 @@ function Finder__MultiCheckbox(props) {
 
   // Ensure we always treat the facet value as an array (Funnelback can return
   // a string for single values). This prevents length checks on strings and
-  // gives a stable `initialChecked` count.
+  // gives a stable `initialChecked` count..
   var rawFacet = (_query$facets = query.facets) === null || _query$facets === void 0 ? void 0 : _query$facets[facet.meta];
   var rawChecked = Array.isArray(rawFacet) ? rawFacet : rawFacet ? [rawFacet] : [];
   var initialChecked = rawChecked.length;
