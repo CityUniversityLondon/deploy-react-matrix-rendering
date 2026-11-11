@@ -56870,7 +56870,7 @@ function Finder__Results__News(props) {
     }) : null,
     defaultImg = props.defaultImage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("picture", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("img", {
       src: props.defaultImage,
-      alt: "News default image",
+      alt: "",
       className: "card__thumbnail"
     }));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("li", {
